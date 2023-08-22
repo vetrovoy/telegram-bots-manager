@@ -1,4 +1,5 @@
 import { Button, Form, Input, Typography } from "antd";
+
 import { rules } from "../../utils/rules";
 import { useTypedSelector } from "../../hooks/useTypedSelector.";
 
@@ -13,11 +14,7 @@ export default function EditUserUsername({ username }: Props) {
 
   return (
     <>
-      <Form
-        name="login"
-        layout="vertical"
-        onFinish={onFinish}
-      >
+      <Form name="login" layout="vertical" onFinish={onFinish}>
         <Typography.Text
           type="secondary"
           style={{ display: "inline-block", marginBottom: 16 }}

@@ -1,4 +1,5 @@
 import { Button, Form, Input, Typography } from "antd";
+
 import { rules } from "../../utils/rules";
 
 import api from "../../api/api";
@@ -64,7 +65,7 @@ export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
         rules={[
           rules.required(),
           rules.isValidToken(
-            "Укажите корректный токен бота, например, 1234567890:ABC-DEF1234ghIkl-zyx57W2v1u123ew11"
+            "Укажите корректный токен бота, например, 1234567890:ABC-DEF1234ghIkl-zyx57W2v1u123ew11",
           ),
         ]}
       >

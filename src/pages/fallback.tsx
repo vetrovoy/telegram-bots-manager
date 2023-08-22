@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { routeNames } from "../route/routes";
+
 import { Layout, Typography } from "antd";
+
+import { routeNames } from "../route/routes";
 
 export default function Fallback() {
   return (

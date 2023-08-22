@@ -1,7 +1,10 @@
 import { Badge, Popover, Space, Table } from "antd";
-import { IBot } from "../../types/app";
+
 import { ColumnsType } from "antd/es/table";
 import { MoreOutlined } from "@ant-design/icons";
+
+import { IBot } from "../../types/app";
+
 import BotPopoverSettings from "./botPopoverSettings";
 
 type Props = {
@@ -30,7 +33,11 @@ const columns: ColumnsType<IBot> = [
     dataIndex: "bot_username",
     key: "bot_username",
     render: (text, record) => (
-      <a target="_blank" href={`https://t.me/${record.bot_username}`}>
+      <a
+        target="_blank"
+        href={`https://t.me/${record.bot_username}`}
+        rel="noreferrer"
+      >
         {text}
       </a>
     ),

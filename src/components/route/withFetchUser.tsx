@@ -1,7 +1,8 @@
-import api from "../../api/api";
 import { message } from "antd";
 import React, { ComponentType, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+
+import api from "../../api/api";
 import {
   useTypedDispatch,
   useTypedSelector,
@@ -21,7 +22,7 @@ interface WithUserProps {
 }
 
 export default function withFetchUser<T extends WithUserProps>(
-  WrappedComponent: ComponentType<T>
+  WrappedComponent: ComponentType<T>,
 ) {
   return (props: Omit<T, keyof WithUserProps>) => {
     const dispatch = useTypedDispatch();
@@ -39,9 +40,8 @@ export default function withFetchUser<T extends WithUserProps>(
         dispatch(setUserStatus("loading"));
         dispatch(setUserMessage("Загрузка..."));
 
-        const fetchedUser: IUser | undefined = await api.getUserByUserName(
-          localUser
-        );
+        const fetchedUser: IUser | undefined =
+          await api.getUserByUserName(localUser);
 
         if (fetchedUser) {
           dispatch(setUserMessage("Успешная авторизация!"));
@@ -50,7 +50,7 @@ export default function withFetchUser<T extends WithUserProps>(
         }
       }
     }
-    
+
     return (
       <>
         {app.status === "loading" || (localUser && !app.user) ? (

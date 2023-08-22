@@ -1,12 +1,13 @@
 import { useState, useMemo } from "react";
 import { Menu, MenuProps } from "antd";
 import { useNavigate } from "react-router-dom";
+
 import AddUserBotFormModal from "../../modal/addUserBotFormModal";
 import LogoutUserModal from "../../modal/logoutUserModal";
 
 import { routeNames } from "../../../route/routes";
 
-export default function HeaderMenu({}) {
+export default function HeaderMenu() {
   const headerMenuRoutes: MenuProps["items"] = useMemo(() => {
     return [
       {

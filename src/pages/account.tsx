@@ -1,7 +1,8 @@
+import { Card, Col, Row } from "antd";
+
 import AccountLayout from "../components/common/layout/accountLayout";
 
 import { routeNames } from "../route/routes";
-import { Card, Col, Row, Typography } from "antd";
 import EditUserUsername from "../components/form/editUserUsername";
 import UserInformation from "../components/user/userInformation";
 import EditUserPassword from "../components/form/editUserPassword";

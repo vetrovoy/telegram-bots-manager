@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Input } from "antd";
+
 import { rules } from "../../utils/rules";
 import userActions from "../../store/app/user/user-actions";
 import {
@@ -29,7 +30,7 @@ export default function LoginUserForm() {
     if (app.status === "success") {
       navigate(routeNames.DASHBOARD);
     }
-  }, [app.status]);
+  }, [app.status, navigate]);
 
   return (
     <>

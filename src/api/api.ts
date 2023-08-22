@@ -1,15 +1,14 @@
-import { IUser, IBot } from "../types/app";
-
 import axios, { AxiosResponse } from "axios";
+
+import { IUser, IBot } from "../types/app";
 
 export class Api {
   public async getUsers(): Promise<IUser[]> {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const response: AxiosResponse<IUser[]> = await axios.get<IUser[]>(
-        `./data/users.json`
-      );
+      const response: AxiosResponse<IUser[]> =
+        await axios.get<IUser[]>(`./data/users.json`);
       return response.data;
     } catch (error: any) {
       throw new Error(`Error while fetching users: ${error.message}`);
@@ -19,7 +18,7 @@ export class Api {
     const response = await this.getUsers();
 
     const result: IUser | undefined = response.find(
-      (v) => v.username === username
+      (v) => v.username === username,
     );
 
     return result;
@@ -27,7 +26,7 @@ export class Api {
   public async getUserBotsByUserName(username: string): Promise<IBot[]> {
     const response = await this.getBots();
     const result: IBot[] | undefined = response.filter(
-      (v) => v.username === username
+      (v) => v.username === username,
     );
 
     return result ? result : [];
@@ -36,9 +35,8 @@ export class Api {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const response: AxiosResponse<IBot[]> = await axios.get<IBot[]>(
-        `./data/bots.json`
-      );
+      const response: AxiosResponse<IBot[]> =
+        await axios.get<IBot[]>(`./data/bots.json`);
       return response.data;
     } catch (error: any) {
       throw new Error(`Error while fetching users: ${error.message}`);
@@ -64,7 +62,7 @@ export class Api {
           };
           resolve(bot);
         }
-      }, 1000)
+      }, 1000),
     );
   }
   private generateBotId(): number {

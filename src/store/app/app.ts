@@ -1,7 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
+import { IUser, IBot } from "../../types/app";
+
 import userReducers from "./user/user-reducers";
 import { login } from "./user/user-actions";
-import { IUser, IBot } from "../../types/app";
 
 export interface IInitialAppState {
   status: "loading" | "loading-inner" | "success" | "error" | "idle";
@@ -32,7 +34,7 @@ const app = createSlice({
       login.fulfilled,
       (state, action: PayloadAction<IInitialAppState>) => {
         return action.payload;
-      }
+      },
     );
     builder.addCase(login.rejected, (state, action) => {
       state.status = "error";

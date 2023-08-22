@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 
-import { routes } from "./route/routes";
 import { Route, Routes } from "react-router-dom";
 
 import { Layout, message } from "antd";
+
+import { routes } from "./route/routes";
 import { useTypedSelector } from "./hooks/useTypedSelector.";
 
 export default function App() {

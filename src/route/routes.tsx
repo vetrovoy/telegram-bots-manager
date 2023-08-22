@@ -6,8 +6,6 @@ import Dashboard from "../pages/dashboard";
 import Account from "../pages/account";
 import Login from "../pages/login";
 
-import withFetchUser from "../components/route/withFetchUser";
-
 export enum routeNames {
   HOME = "/",
   LOGIN = "/",

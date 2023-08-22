@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { IBot } from "../../types/app";
+
 import { Menu, MenuProps } from "antd";
 import {
   DeleteOutlined,
@@ -7,8 +7,10 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 
-import { routeNames } from "../../route/routes";
 import { useNavigate } from "react-router-dom";
+
+import { routeNames } from "../../route/routes";
+import { IBot } from "../../types/app";
 import {
   useTypedDispatch,
   useTypedSelector,
@@ -50,7 +52,7 @@ export default function BotPopoverSettings({ bot }: Props) {
         icon: <DeleteOutlined style={{ color: "red" }} />,
       },
     ];
-  }, []);
+  }, [bot.id, bot.status]);
 
   const handleMenuItemClick = (v: { key: string }) => {
     switch (v.key) {

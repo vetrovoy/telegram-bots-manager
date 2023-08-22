@@ -6,8 +6,10 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Layout, Menu } from "antd";
-import { routeNames } from "../../route/routes";
+
 import { useNavigate, useLocation } from "react-router-dom";
+
+import { routeNames } from "../../route/routes";
 import LogoutUserModal from "../modal/logoutUserModal";
 
 const { Sider } = Layout;
@@ -18,7 +20,7 @@ function getItem(
   label: React.ReactNode,
   key: React.Key,
   icon?: React.ReactNode,
-  children?: MenuItem[]
+  children?: MenuItem[],
 ): MenuItem {
   return {
     key,

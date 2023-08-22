@@ -1,6 +1,6 @@
-import api from "../../../api/api";
-
 import { createAsyncThunk } from "@reduxjs/toolkit";
+
+import api from "../../../api/api";
 
 import { IInitialAppState } from "../app";
 import { IUser, IBot } from "../../../types/app";
@@ -19,14 +19,14 @@ const userActions = {
       };
 
       const user: IUser | undefined = usersResponse.find(
-        (v) => v.username === userData.username
+        (v) => v.username === userData.username,
       );
 
       if (!user) return result;
 
       if (user.password === userData.password) {
         const userBots: IBot[] = await api.getUserBotsByUserName(
-          userData.username
+          userData.username,
         );
 
         result = {
@@ -48,7 +48,7 @@ const userActions = {
       };
 
       return result;
-    }
+    },
   ),
 };
 

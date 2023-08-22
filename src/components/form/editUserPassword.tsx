@@ -1,7 +1,8 @@
 import React from "react";
 
-import { IUser } from "../../types/app";
 import { Button, Form, Input, Typography } from "antd";
+
+import { IUser } from "../../types/app";
 import { useTypedSelector } from "../../hooks/useTypedSelector.";
 import { rules } from "../../utils/rules";
 
@@ -16,11 +17,7 @@ export default function EditUserPassword({ user }: IEditUserPassword) {
 
   return (
     <>
-      <Form
-        name="login"
-        layout="vertical"
-        onFinish={onFinish}
-      >
+      <Form name="login" layout="vertical" onFinish={onFinish}>
         <Typography.Text
           type="secondary"
           style={{ display: "inline-block", marginBottom: 16 }}
