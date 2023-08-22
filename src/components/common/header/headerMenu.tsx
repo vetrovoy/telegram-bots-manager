@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Menu, MenuProps } from "antd";
 import { useNavigate } from "react-router-dom";
 import AddUserBotFormModal from "../../modal/addUserBotFormModal";
@@ -6,22 +6,24 @@ import LogoutUserModal from "../../modal/logoutUserModal";
 
 import { routeNames } from "../../../route/routes";
 
-const headerMenuRoutes: MenuProps["items"] = [
-  {
-    key: routeNames.DASHBOARD,
-    label: localStorage.getItem("username"),
-  },
-  {
-    key: routeNames.ACCOUNT,
-    label: `Личный кабинет`,
-  },
-  {
-    key: "EXIT",
-    label: `Выйти`,
-  },
-];
-
 export default function HeaderMenu({}) {
+  const headerMenuRoutes: MenuProps["items"] = useMemo(() => {
+    return [
+      {
+        key: routeNames.DASHBOARD,
+        label: localStorage.getItem("username"),
+      },
+      {
+        key: routeNames.ACCOUNT,
+        label: `Личный кабинет`,
+      },
+      {
+        key: "EXIT",
+        label: `Выйти`,
+      },
+    ];
+  }, []);
+
   const [isShowLogoutModal, setIsShowLogoutModal] = useState<boolean>(false);
 
   const navigate = useNavigate();

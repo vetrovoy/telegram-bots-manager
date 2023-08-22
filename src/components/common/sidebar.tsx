@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   DesktopOutlined,
   UserOutlined,
@@ -28,16 +28,17 @@ function getItem(
   } as MenuItem;
 }
 
-const sidebarMenuRoutes: MenuItem[] = [
-  getItem(localStorage.getItem("username"), "USERNAME", <UserOutlined />, [
-    getItem("Личный кабинет", routeNames.ACCOUNT),
-  ]),
-  getItem("Мои боты", routeNames.DASHBOARD, <DesktopOutlined />),
-  getItem("Выйти", "EXIT", <LogoutOutlined />),
-];
-
-
 export default function Sidebar() {
+  const sidebarMenuRoutes: MenuItem[] = useMemo(() => {
+    return [
+      getItem(localStorage.getItem("username"), "USERNAME", <UserOutlined />, [
+        getItem("Личный кабинет", routeNames.ACCOUNT),
+      ]),
+      getItem("Мои боты", routeNames.DASHBOARD, <DesktopOutlined />),
+      getItem("Выйти", "EXIT", <LogoutOutlined />),
+    ];
+  }, []);
+
   const location = useLocation();
   const navigate = useNavigate();
 

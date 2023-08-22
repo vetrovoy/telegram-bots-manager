@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { IBot } from "../../types/app";
 import { Menu, MenuProps } from "antd";
 import {
@@ -27,27 +28,29 @@ export default function BotPopoverSettings({ bot }: Props) {
   const dispatch = useTypedDispatch();
   const navigate = useNavigate();
 
-  const headerMenuRoutes: MenuProps["items"] = [
-    {
-      key: `${routeNames.ACCOUNT}/${bot.id}`,
-      label: "Настройки",
-      icon: <SettingOutlined />,
-    },
-    {
-      key: bot.status === "processing" ? "OFF" : "ON",
-      label: bot.status === "processing" ? "Выключить" : "Включить",
-      icon: (
-        <PoweroffOutlined
-          style={{ color: bot.status === "processing" ? "red" : "green" }}
-        />
-      ),
-    },
-    {
-      key: "DELETE",
-      label: "Удалить",
-      icon: <DeleteOutlined style={{ color: "red" }} />,
-    },
-  ];
+  const headerMenuRoutes: MenuProps["items"] = useMemo(() => {
+    return [
+      {
+        key: `${routeNames.ACCOUNT}/${bot.id}`,
+        label: "Настройки",
+        icon: <SettingOutlined />,
+      },
+      {
+        key: bot.status === "processing" ? "OFF" : "ON",
+        label: bot.status === "processing" ? "Выключить" : "Включить",
+        icon: (
+          <PoweroffOutlined
+            style={{ color: bot.status === "processing" ? "red" : "green" }}
+          />
+        ),
+      },
+      {
+        key: "DELETE",
+        label: "Удалить",
+        icon: <DeleteOutlined style={{ color: "red" }} />,
+      },
+    ];
+  }, []);
 
   const handleMenuItemClick = (v: { key: string }) => {
     switch (v.key) {
