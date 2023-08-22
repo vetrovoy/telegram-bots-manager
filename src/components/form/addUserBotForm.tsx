@@ -31,14 +31,15 @@ export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
     dispatch(setUserStatus("loading-inner"));
 
     const bot: IBot = await api.createBot(v.token, app.user.username);
+    const isBotExist = app.bots.find((b) => b.token === v.token);
 
-    if (!bot) {
+    if (bot && !isBotExist) {
       dispatch(setUserBots([...app.bots, bot]));
       dispatch(setUserMessage("Бот успешно создан!"));
       dispatch(setUserStatus("success"));
       onFinish();
     } else {
-      dispatch(setUserMessage("Ошибка!"));
+      dispatch(setUserMessage("Ошибка, бот с таким токеном уже существует!"));
       dispatch(setUserStatus("error"));
     }
   };
