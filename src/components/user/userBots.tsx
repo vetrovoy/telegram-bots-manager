@@ -26,16 +26,17 @@ export default function UserBots({ user }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    if (bots.length) return;
-    fetchBots();
-  }, []);
+    async function fetchBots() {
+      if (bots.length) return;
 
-  async function fetchBots() {
-    setIsLoading(true);
-    const userBots: IBot[] = await api.getUserBotsByUserName(user.username);
-    setIsLoading(false);
-    dispatch(setUserBots(userBots));
-  }
+      setIsLoading(true);
+      const userBots: IBot[] = await api.getUserBotsByUserName(user.username);
+      setIsLoading(false);
+      dispatch(setUserBots(userBots));
+    }
+    fetchBots();
+  }, [bots.length, dispatch, user.username]);
+
   return (
     <>
       {isLoading ? (

@@ -7,7 +7,6 @@ import EditUserUsername from "../components/form/editUserUsername";
 import UserInformation from "../components/user/userInformation";
 import EditUserPassword from "../components/form/editUserPassword";
 import EditUserLanguage from "../components/form/editUserLanguage";
-import withFetchUser from "../components/route/withFetchUser";
 import { IUser } from "../types/app";
 import RemoveUserModal from "../components/modal/removeUserModal";
 
@@ -15,7 +14,7 @@ interface IAccount {
   user: IUser;
 }
 
-function AccountPage({ user }: IAccount) {
+export default function Account({ user }: IAccount) {
   return (
     <>
       <AccountLayout
@@ -53,6 +52,3 @@ function AccountPage({ user }: IAccount) {
     </>
   );
 }
-
-const Account = withFetchUser(AccountPage);
-export default Account;

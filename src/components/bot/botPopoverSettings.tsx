@@ -96,9 +96,11 @@ export default function BotPopoverSettings({ bot }: Props) {
 
       if (curBot?.status === "processing") {
         const newBot: IBot = { ...curBot, status: "default" };
+        dispatch(setUserMessage(`Бот и именем ${newBot.bot_name} выключен!`));
         newBots.push(newBot);
       } else {
         const newBot: IBot = { ...curBot, status: "processing" };
+        dispatch(setUserMessage(`Бот и именем ${newBot.bot_name} включен!`));
         newBots.push(newBot);
       }
 

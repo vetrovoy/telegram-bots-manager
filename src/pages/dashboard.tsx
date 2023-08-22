@@ -3,7 +3,6 @@ import { Card, Tooltip, Typography } from "antd";
 import AccountLayout from "../components/common/layout/accountLayout";
 
 import { routeNames } from "../route/routes";
-import withFetchUser from "../components/route/withFetchUser";
 import { IUser } from "../types/app";
 
 import UserBots from "../components/user/userBots";
@@ -12,7 +11,7 @@ interface IDashboard {
   user: IUser;
 }
 
-function DashboardPage({ user }: IDashboard) {
+export default function Dashboard({ user }: IDashboard) {
   return (
     <AccountLayout
       path={routeNames.DASHBOARD}
@@ -50,7 +49,3 @@ function DashboardPage({ user }: IDashboard) {
     </AccountLayout>
   );
 }
-
-const Dashboard = withFetchUser(DashboardPage);
-
-export default Dashboard;

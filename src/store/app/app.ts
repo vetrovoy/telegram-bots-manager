@@ -18,7 +18,7 @@ const initialState: IInitialAppState = {
   user: null,
   bots: [],
 };
-
+// TODO bots вынести отдельно из файла с юзера
 const app = createSlice({
   name: "user",
   initialState,

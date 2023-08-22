@@ -1,6 +1,5 @@
-import { message } from "antd";
-import React, { ComponentType, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { ComponentType, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 
 import api from "../../api/api";
 import {
@@ -17,39 +16,38 @@ import { IUser } from "../../types/app";
 import { routeNames } from "../../route/routes";
 import AppSpin from "../common/appSpin";
 
-interface WithUserProps {
+interface IWithUserProtectedRoute {
   user: IUser | null;
 }
 
-export default function withFetchUser<T extends WithUserProps>(
-  WrappedComponent: ComponentType<T>,
-) {
-  return (props: Omit<T, keyof WithUserProps>) => {
+export default function withUserProtectedRoute<
+  T extends IWithUserProtectedRoute,
+>(WrappedComponent: ComponentType<T>) {
+  return (props: Omit<T, keyof IWithUserProtectedRoute>) => {
     const dispatch = useTypedDispatch();
     const app: IInitialAppState = useTypedSelector((state) => state.app);
     const localUser: string | null = localStorage.getItem("username");
 
     useEffect(() => {
-      if (app.user) return;
+      async function fetchUser() {
+        if (app.user) return;
 
-      fetchUser();
-    }, [app.user]);
+        if (localUser) {
+          dispatch(setUserStatus("loading"));
+          dispatch(setUserMessage("Загрузка..."));
 
-    async function fetchUser() {
-      if (localUser) {
-        dispatch(setUserStatus("loading"));
-        dispatch(setUserMessage("Загрузка..."));
+          const fetchedUser: IUser | undefined =
+            await api.getUserByUserName(localUser);
 
-        const fetchedUser: IUser | undefined =
-          await api.getUserByUserName(localUser);
-
-        if (fetchedUser) {
-          dispatch(setUserMessage("Успешная авторизация!"));
-          dispatch(setUserStatus("success"));
-          dispatch(setUser(fetchedUser));
+          if (fetchedUser) {
+            dispatch(setUserMessage("Успешная авторизация!"));
+            dispatch(setUserStatus("success"));
+            dispatch(setUser(fetchedUser));
+          }
         }
       }
-    }
+      fetchUser();
+    }, [app.user, dispatch, localUser]);
 
     function renderContent() {
       const isAppLoading = app.status === "loading";
