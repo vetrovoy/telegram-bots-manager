@@ -4,8 +4,7 @@ react / typescript / react-router-dom / redux-toolkit / ant-design / mock api
 
 вход:
 
-username: admin || user \
-password: admin || password
+admin; admin или user;password
 
 ## Available Scripts
 
