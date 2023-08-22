@@ -1,6 +1,10 @@
 import { Badge, Descriptions } from "antd";
 import type { DescriptionsProps } from "antd";
 
+type Props = {
+  username: string;
+};
+
 const items: DescriptionsProps["items"] = [
   {
     key: "1",
@@ -22,6 +26,6 @@ const items: DescriptionsProps["items"] = [
   },
 ];
 
-export default function UserInformation() {
+export default function UserInformation({ username }: Props) {
   return <Descriptions bordered items={items} />;
 }

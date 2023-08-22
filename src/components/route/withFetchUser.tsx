@@ -51,16 +51,25 @@ export default function withFetchUser<T extends WithUserProps>(
       }
     }
 
-    return (
-      <>
-        {app.status === "loading" || (localUser && !app.user) ? (
-          <AppSpin />
-        ) : app.user ? (
-          <WrappedComponent {...(props as T)} user={app.user} />
-        ) : (
-          !app.user && !localUser && <Navigate to={routeNames.HOME} />
-        )}
-      </>
-    );
+    function renderContent() {
+      const isAppLoading = app.status === "loading";
+      const hasLocalUserAndNoAppUser = localUser && !app.user;
+      const hasAppUser = app.user;
+      const noAppUserAndNoLocalUser = !app.user && !localUser;
+
+      if (isAppLoading || hasLocalUserAndNoAppUser) {
+        return <AppSpin />;
+      }
+
+      if (hasAppUser) {
+        return <WrappedComponent {...(props as T)} user={app.user} />;
+      }
+
+      if (noAppUserAndNoLocalUser) {
+        return <Navigate to={routeNames.HOME} />;
+      }
+    }
+
+    return <>{renderContent()}</>;
   };
 }
