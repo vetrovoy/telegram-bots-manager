@@ -1,4 +1,4 @@
-import Api from "../../api/api";
+import api from "../../api/api";
 import { message } from "antd";
 import React, { ComponentType, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -6,11 +6,15 @@ import {
   useTypedDispatch,
   useTypedSelector,
 } from "../../hooks/useTypedSelector.";
-import { setUser, setUserMessage, setUserStatus } from "../../store/user/user";
-import { IUser } from "../../types/user";
+import {
+  IInitialAppState,
+  setUser,
+  setUserMessage,
+  setUserStatus,
+} from "../../store/app/app";
+import { IUser } from "../../types/app";
 import { routeNames } from "../../route/routes";
-import Appspin from "../appSpin";
-import AppSpin from "../appSpin";
+import AppSpin from "../common/appSpin";
 
 interface WithUserProps {
   user: IUser | null;
@@ -20,17 +24,15 @@ export default function withFetchUser<T extends WithUserProps>(
   WrappedComponent: ComponentType<T>
 ) {
   return (props: Omit<T, keyof WithUserProps>) => {
-    const api = new Api();
-
     const dispatch = useTypedDispatch();
-    const user = useTypedSelector((state) => state.user);
+    const app: IInitialAppState = useTypedSelector((state) => state.app);
     const localUser: string | null = localStorage.getItem("username");
 
     useEffect(() => {
-      if (user.user) return;
+      if (app.user) return;
 
       fetchUser();
-    }, [user.user]);
+    }, [app.user]);
 
     async function fetchUser() {
       if (localUser) {
@@ -42,21 +44,21 @@ export default function withFetchUser<T extends WithUserProps>(
         );
 
         if (fetchedUser) {
-          dispatch(setUser(fetchedUser));
-          dispatch(setUserStatus("success"));
           dispatch(setUserMessage("Успешная авторизация!"));
+          dispatch(setUserStatus("success"));
+          dispatch(setUser(fetchedUser));
         }
       }
     }
-
+    
     return (
       <>
-        {user.status === "loading" ? (
+        {app.status === "loading" || (localUser && !app.user) ? (
           <AppSpin />
-        ) : user.user || localUser ? (
-          <WrappedComponent {...(props as T)} user={user} />
+        ) : app.user ? (
+          <WrappedComponent {...(props as T)} user={app.user} />
         ) : (
-          <Navigate to={routeNames.HOME} />
+          !app.user && !localUser && <Navigate to={routeNames.HOME} />
         )}
       </>
     );

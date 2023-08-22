@@ -1,4 +1,4 @@
-import AccountLayout from "../components/layout/accountLayout";
+import AccountLayout from "../components/common/layout/accountLayout";
 
 import { routeNames } from "../route/routes";
 import { Card, Col, Row, Typography } from "antd";
@@ -7,7 +7,7 @@ import UserInformation from "../components/user/userInformation";
 import EditUserPassword from "../components/form/editUserPassword";
 import EditUserLanguage from "../components/form/editUserLanguage";
 import withFetchUser from "../components/route/withFetchUser";
-import { IUser } from "../types/user";
+import { IUser } from "../types/app";
 import RemoveUserModal from "../components/modal/removeUserModal";
 
 interface IAccount {

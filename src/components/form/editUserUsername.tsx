@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function EditUserUsername({ username }: Props) {
-  const user = useTypedSelector((state) => state.user);
+  const app = useTypedSelector((state) => state.app);
 
   const onFinish = () => {};
 
@@ -17,7 +17,6 @@ export default function EditUserUsername({ username }: Props) {
         name="login"
         layout="vertical"
         onFinish={onFinish}
-        autoComplete="off"
       >
         <Typography.Text
           type="secondary"
@@ -37,7 +36,7 @@ export default function EditUserUsername({ username }: Props) {
 
         <Form.Item>
           <Button
-            loading={user.status === "loading"}
+            loading={app.status === "loading"}
             type="primary"
             htmlType="submit"
             style={{ marginTop: "20px" }}

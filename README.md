@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# В проекте
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+react / typescript / react-router-dom / redux-toolkit / ant-design / mock api
+
+вход:
+
+username: admin | user
+password: admin | password
 
 ## Available Scripts
 

@@ -3,12 +3,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 import { rules } from "../../utils/rules";
-import userActions from "../../store/user/user-actions";
+import userActions from "../../store/app/user/user-actions";
 import {
   useTypedDispatch,
   useTypedSelector,
 } from "../../hooks/useTypedSelector.";
-import { IUser } from "../../types/user";
+import { IUser } from "../../types/app";
 import { routeNames } from "../../route/routes";
 
 type FieldType = {
@@ -19,26 +19,21 @@ type FieldType = {
 export default function LoginUserForm() {
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
-  const user = useTypedSelector((state) => state.user);
+  const app = useTypedSelector((state) => state.app);
 
   const onFinish = (values: IUser) => {
     dispatch(userActions.login(values));
   };
 
   useEffect(() => {
-    if (user.status === "success") {
+    if (app.status === "success") {
       navigate(routeNames.DASHBOARD);
     }
-  }, [user.status]);
+  }, [app.status]);
 
   return (
     <>
-      <Form
-        name="login"
-        layout="vertical"
-        onFinish={onFinish}
-        autoComplete="off"
-      >
+      <Form name="login" layout="vertical" onFinish={onFinish}>
         <Form.Item<FieldType>
           label="Имя"
           name="username"
@@ -57,7 +52,7 @@ export default function LoginUserForm() {
 
         <Form.Item>
           <Button
-            loading={user.status === "loading"}
+            loading={app.status === "loading"}
             type="primary"
             htmlType="submit"
             style={{ marginTop: "20px" }}

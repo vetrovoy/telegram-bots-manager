@@ -4,9 +4,13 @@ import AddBotForm from "../form/addUserBotForm";
 
 interface IAddUserBotFormModal {
   title: string;
+  style?: React.CSSProperties;
 }
 
-export default function AddUserBotFormModal({ title }: IAddUserBotFormModal) {
+export default function AddUserBotFormModal({
+  title,
+  style,
+}: IAddUserBotFormModal) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const showModal = () => {
@@ -23,11 +27,7 @@ export default function AddUserBotFormModal({ title }: IAddUserBotFormModal) {
 
   return (
     <>
-      <Button
-        style={{ display: "block", marginTop: 30 }}
-        type="primary"
-        onClick={showModal}
-      >
+      <Button type="primary" onClick={showModal} style={style}>
         {title}
       </Button>
       <Modal
@@ -37,7 +37,7 @@ export default function AddUserBotFormModal({ title }: IAddUserBotFormModal) {
         onCancel={handleCancel}
         footer={null}
       >
-        <AddBotForm />
+        <AddBotForm onFinish={handleCancel} />
       </Modal>
     </>
   );

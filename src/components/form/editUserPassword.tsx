@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IUser } from "../../types/user";
+import { IUser } from "../../types/app";
 import { Button, Form, Input, Typography } from "antd";
 import { useTypedSelector } from "../../hooks/useTypedSelector.";
 import { rules } from "../../utils/rules";
@@ -10,7 +10,7 @@ interface IEditUserPassword {
 }
 
 export default function EditUserPassword({ user }: IEditUserPassword) {
-  const userStatus = useTypedSelector((state) => state.user.status);
+  const userStatus = useTypedSelector((state) => state.app.status);
 
   const onFinish = () => {};
 
@@ -20,7 +20,6 @@ export default function EditUserPassword({ user }: IEditUserPassword) {
         name="login"
         layout="vertical"
         onFinish={onFinish}
-        autoComplete="off"
       >
         <Typography.Text
           type="secondary"

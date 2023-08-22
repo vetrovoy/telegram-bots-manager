@@ -1,19 +1,18 @@
 import { Card, Tooltip, Typography } from "antd";
 
-import AddUserBotFormModal from "../components/modal/addUserBotFormModal";
-import AccountLayout from "../components/layout/accountLayout";
+import AccountLayout from "../components/common/layout/accountLayout";
 
 import { routeNames } from "../route/routes";
 import withFetchUser from "../components/route/withFetchUser";
-import { IUser } from "../types/user";
+import { IUser } from "../types/app";
+
+import UserBots from "../components/user/userBots";
 
 interface IDashboard {
   user: IUser;
 }
 
 function DashboardPage({ user }: IDashboard) {
-  console.log(user);
-
   return (
     <AccountLayout
       path={routeNames.DASHBOARD}
@@ -32,11 +31,7 @@ function DashboardPage({ user }: IDashboard) {
         }
         style={{ width: "100%" }}
       >
-        <Typography.Text type="secondary">
-          Вы ещё не создали ни одного бота
-        </Typography.Text>
-
-        <AddUserBotFormModal title="Создать бота" />
+        <UserBots user={user} />
       </Card>
 
       <Card

@@ -1,6 +1,6 @@
 import { Modal, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
-import { setUser, setUserMessage, setUserStatus } from "../../store/user/user";
+import { setUser, setUserMessage, setUserStatus } from "../../store/app/app";
 import { routeNames } from "../../route/routes";
 import { useTypedDispatch } from "../../hooks/useTypedSelector.";
 
@@ -21,9 +21,9 @@ export default function LogoutUserModal({
   const handleOkFunc = () => {
     navigate(routeNames.LOGIN);
     localStorage.setItem("username", "");
-    disptach(setUser(null));
     disptach(setUserStatus("idle"));
     disptach(setUserMessage(""));
+    disptach(setUser(null));
 
     handleOk();
   };

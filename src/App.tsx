@@ -7,21 +7,23 @@ import { Layout, message } from "antd";
 import { useTypedSelector } from "./hooks/useTypedSelector.";
 
 export default function App() {
-  const user = useTypedSelector((state) => state.user);
+  const app = useTypedSelector((state) => state.app);
 
   const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(() => {
     if (
-      user.status === "error" ||
-      user.status === "loading"
+      app.status === "success" ||
+      app.status === "error" ||
+      app.status === "loading" ||
+      app.status === "loading-inner"
     ) {
       messageApi.open({
-        type: user.status,
-        content: user.message,
+        type: app.status === "loading-inner" ? "loading" : app.status,
+        content: app.message,
       });
     }
-  }, [user.status]);
+  }, [app.status]);
 
   return (
     <>

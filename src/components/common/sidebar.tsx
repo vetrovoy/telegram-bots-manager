@@ -6,11 +6,9 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Layout, Menu } from "antd";
-import { routeNames } from "../route/routes";
-import { useTypedDispatch } from "../hooks/useTypedSelector.";
+import { routeNames } from "../../route/routes";
 import { useNavigate, useLocation } from "react-router-dom";
-import { setUser, setUserMessage, setUserStatus } from "../store/user/user";
-import LogoutUserModal from "./modal/logoutUserModal";
+import LogoutUserModal from "../modal/logoutUserModal";
 
 const { Sider } = Layout;
 
@@ -30,21 +28,22 @@ function getItem(
   } as MenuItem;
 }
 
-export default function Sidebar() {
-  const sidebarMenuRoutes: MenuItem[] = [
-    getItem(localStorage.getItem("username"), "USERNAME", <UserOutlined />, [
-      getItem("Личный кабинет", routeNames.ACCOUNT),
-    ]),
-    getItem("Мои боты", routeNames.DASHBOARD, <DesktopOutlined />),
-    getItem("Выйти", "EXIT", <LogoutOutlined />),
-  ];
+const sidebarMenuRoutes: MenuItem[] = [
+  getItem(localStorage.getItem("username"), "USERNAME", <UserOutlined />, [
+    getItem("Личный кабинет", routeNames.ACCOUNT),
+  ]),
+  getItem("Мои боты", routeNames.DASHBOARD, <DesktopOutlined />),
+  getItem("Выйти", "EXIT", <LogoutOutlined />),
+];
 
+
+export default function Sidebar() {
   const location = useLocation();
   const navigate = useNavigate();
 
   const [collapsed, setCollapsed] = useState(false);
   const [isShowLogoutModal, setIsShowLogoutModal] = useState<boolean>(false);
-  
+
   const handleMenuItemClick = (v: { key: string }) => {
     if (v.key === "EXIT") {
       setIsShowLogoutModal(true);

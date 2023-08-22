@@ -1,15 +1,55 @@
 import { Button, Form, Input, Typography } from "antd";
 import { rules } from "../../utils/rules";
 
+import api from "../../api/api";
+import {
+  useTypedDispatch,
+  useTypedSelector,
+} from "../../hooks/useTypedSelector.";
+import { IBot } from "../../types/app";
+import {
+  setUserBots,
+  setUserMessage,
+  setUserStatus,
+} from "../../store/app/app";
+
 type FieldType = {
   token?: string;
 };
 
-export default function AddUserBotForm() {
-  const onFinish = () => {};
+interface IAddUserBotForm {
+  onFinish: () => void;
+}
+
+export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
+  const dispatch = useTypedDispatch();
+  const app = useTypedSelector((state) => state.app);
+
+  const onFinishHandler = async (v: { token: string }) => {
+    if (!app.user) return;
+    dispatch(setUserMessage("Создание нового бота..."));
+    dispatch(setUserStatus("loading-inner"));
+
+    const bot: IBot = await api.createBot(v.token, app.user.username);
+
+    if (!bot) {
+      dispatch(setUserBots([...app.bots, bot]));
+      dispatch(setUserMessage("Бот успешно создан!"));
+      dispatch(setUserStatus("success"));
+      onFinish();
+    } else {
+      dispatch(setUserMessage("Ошибка!"));
+      dispatch(setUserStatus("error"));
+    }
+  };
 
   return (
-    <Form name="login" layout="vertical" onFinish={onFinish} autoComplete="off">
+    <Form
+      name="login"
+      layout="vertical"
+      onFinish={onFinishHandler}
+      autoComplete="off"
+    >
       <Typography.Text
         type="secondary"
         style={{ display: "inline-block", marginBottom: 20 }}
@@ -39,7 +79,7 @@ export default function AddUserBotForm() {
 
       <Form.Item>
         <Button
-          // loading={user.status === "loading"}
+          loading={app.status === "loading-inner"}
           type="primary"
           htmlType="submit"
           style={{ marginTop: "20px" }}

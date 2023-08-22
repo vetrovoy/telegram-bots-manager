@@ -5,8 +5,8 @@ export const rules = {
   }),
   isValidToken: (message: string) => () => ({
     validator(_: any, value: string) {
-      const regex = /^[\d]+:[A-Z\-a-z\d]+-[A-Z\-a-z\d]+$/;
-      
+      const regex = /^\d{10}.{33,}$/;
+
       if (value && regex.test(value)) {
         return Promise.resolve();
       } else {

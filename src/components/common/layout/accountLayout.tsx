@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { Layout, Breadcrumb } from "antd";
 
 import Sidebar from "../sidebar";
-import Header from "../header";
+import Header from "../header/header";
 
-import { routeNames } from "../../route/routes";
+import { routeNames } from "../../../route/routes";
 
 interface IAccountLayout {
   title: string;

@@ -1,7 +1,7 @@
-import { userReducer } from "./user/user";
+import { appReducer } from "./app/app";
 
 const reducers = {
-  user: userReducer,
+  app: appReducer,
 };
 
 export default reducers;
