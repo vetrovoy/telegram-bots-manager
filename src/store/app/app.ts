@@ -44,4 +44,6 @@ const app = createSlice({
 
 export const { setUser, setUserMessage, setUserStatus, setUserBots } =
   app.actions;
+// export const userActions = app.actions;
+
 export const appReducer = app.reducer;

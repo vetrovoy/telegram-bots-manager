@@ -78,8 +78,8 @@ export default function BotPopoverSettings({ bot }: Props) {
 
     setTimeout(() => {
       const filtred = bots.filter((b) => b.token !== bot.token);
-      console.log(bots, bot.token);
       dispatch(setUserBots(filtred));
+      dispatch(setUserMessage(`Бот с именем ${bot.bot_name} удален!`));
       dispatch(setUserStatus("success"));
     }, 1000);
   }
