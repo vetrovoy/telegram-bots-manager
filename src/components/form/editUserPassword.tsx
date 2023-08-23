@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Button, Form, Input, Typography } from "antd";
 
 import { IUser } from "../../types/app";
@@ -11,7 +9,7 @@ interface IEditUserPassword {
 }
 
 export default function EditUserPassword({ user }: IEditUserPassword) {
-  const userStatus = useTypedSelector((state) => state.app.status);
+  const userStatus = useTypedSelector((state) => state.user.status);
 
   const onFinish = () => {};
 

@@ -9,12 +9,13 @@ import EditUserPassword from "../components/form/editUserPassword";
 import EditUserLanguage from "../components/form/editUserLanguage";
 import { IUser } from "../types/app";
 import RemoveUserModal from "../components/modal/removeUserModal";
+import withUserProtectedRoute from "../components/route/withUserProtectedRoute";
 
 interface IAccount {
   user: IUser;
 }
 
-export default function Account({ user }: IAccount) {
+export default withUserProtectedRoute(function Account({ user }: IAccount) {
   return (
     <>
       <AccountLayout
@@ -51,4 +52,4 @@ export default function Account({ user }: IAccount) {
       </AccountLayout>
     </>
   );
-}
+});

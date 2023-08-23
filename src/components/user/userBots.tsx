@@ -1,18 +1,16 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { Skeleton, Typography } from "antd";
 
 import AddUserBotFormModal from "../modal/addUserBotFormModal";
 
-import api from "../../api/api";
-import { IBot } from "../../types/app";
 import { IUser } from "../../types/app";
 import BotsTable from "../bot/BotsTable";
-import { setUserBots } from "../../store/app/app";
 import {
   useTypedDispatch,
   useTypedSelector,
 } from "../../hooks/useTypedSelector.";
+import botsAsyncActions from "../../store/bots/bots-async-actions";
 
 type Props = {
   user: IUser;
@@ -20,32 +18,19 @@ type Props = {
 
 export default function UserBots({ user }: Props) {
   const dispatch = useTypedDispatch();
-  const app = useTypedSelector((state) => state.app);
-  const bots = app.bots;
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const bots = useTypedSelector((state) => state.bots);
 
   useEffect(() => {
-    fetchBots();
+    if (bots.bots.length) return;
+    dispatch(botsAsyncActions.getBots(user));
   }, []);
-
-  async function fetchBots() {
-    if (bots.length) return;
-    setIsLoading(true);
-    const userBots: IBot[] = await api.getUserBotsByUserName(user.username);
-    setIsLoading(false);
-    dispatch(setUserBots(userBots));
-  }
 
   return (
     <>
-      {isLoading ? (
-        <Skeleton
-          title={{ width: "100%" }}
-          paragraph={{ rows: 2, width: "100%" }}
-        />
-      ) : bots.length > 0 ? (
-        <BotsTable bots={bots} loading={app.status === "loading-inner"} />
+      {bots.status === "loading" ? (
+        <BotsTable loading={bots.status === "loading"} bots={bots.bots} />
+      ) : bots.bots.length > 0 ? (
+        <BotsTable bots={bots.bots} />
       ) : (
         <>
           <Typography.Text type="secondary">

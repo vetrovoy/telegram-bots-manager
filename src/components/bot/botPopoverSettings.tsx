@@ -15,18 +15,14 @@ import {
   useTypedDispatch,
   useTypedSelector,
 } from "../../hooks/useTypedSelector.";
-import {
-  setUserBots,
-  setUserMessage,
-  setUserStatus,
-} from "../../store/app/app";
+import { botsActions } from "../../store/bots/bots";
 
 type Props = {
   bot: IBot;
 };
 
 export default function BotPopoverSettings({ bot }: Props) {
-  const bots = useTypedSelector((state) => state.app.bots);
+  const bots = useTypedSelector((state) => state.bots.bots);
   const dispatch = useTypedDispatch();
   const navigate = useNavigate();
 
@@ -58,7 +54,6 @@ export default function BotPopoverSettings({ bot }: Props) {
     switch (v.key) {
       case "DELETE":
         deleteBot();
-
         break;
       case "OFF":
         toggleBot();
@@ -73,20 +68,22 @@ export default function BotPopoverSettings({ bot }: Props) {
   };
 
   async function deleteBot() {
-    dispatch(setUserMessage("Удаление..."));
-    dispatch(setUserStatus("loading-inner"));
+    dispatch(botsActions.setBotsMessage("Удаление..."));
+    dispatch(botsActions.setBotsStatus("loading"));
 
     setTimeout(() => {
       const filtred = bots.filter((b) => b.token !== bot.token);
-      dispatch(setUserBots(filtred));
-      dispatch(setUserMessage(`Бот с именем ${bot.bot_name} удален!`));
-      dispatch(setUserStatus("success"));
+      dispatch(botsActions.setBots(filtred));
+      dispatch(
+        botsActions.setBotsMessage(`Бот с именем ${bot.bot_name} удален!`),
+      );
+      dispatch(botsActions.setBotsStatus("success"));
     }, 1000);
   }
 
   async function toggleBot() {
-    dispatch(setUserMessage("Загрузка..."));
-    dispatch(setUserStatus("loading-inner"));
+    dispatch(botsActions.setBotsMessage("Загрузка..."));
+    dispatch(botsActions.setBotsStatus("loading"));
 
     setTimeout(() => {
       const newBots = bots.filter((b) => b.token !== bot.token);
@@ -96,16 +93,24 @@ export default function BotPopoverSettings({ bot }: Props) {
 
       if (curBot?.status === "processing") {
         const newBot: IBot = { ...curBot, status: "default" };
-        dispatch(setUserMessage(`Бот и именем ${newBot.bot_name} выключен!`));
+        dispatch(
+          botsActions.setBotsMessage(
+            `Бот и именем ${newBot.bot_name} выключен!`,
+          ),
+        );
         newBots.push(newBot);
       } else {
         const newBot: IBot = { ...curBot, status: "processing" };
-        dispatch(setUserMessage(`Бот и именем ${newBot.bot_name} включен!`));
+        dispatch(
+          botsActions.setBotsMessage(
+            `Бот и именем ${newBot.bot_name} включен!`,
+          ),
+        );
         newBots.push(newBot);
       }
 
-      dispatch(setUserBots(newBots));
-      dispatch(setUserStatus("success"));
+      dispatch(botsActions.setBots(newBots));
+      dispatch(botsActions.setBotsStatus("success"));
     }, 1000);
   }
 

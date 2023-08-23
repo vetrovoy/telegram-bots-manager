@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form, Input } from "antd";
 
 import { rules } from "../../utils/rules";
-import userActions from "../../store/app/user/user-actions";
+import userAsyncActions from "../../store/user/user-async-actions";
 import {
   useTypedDispatch,
   useTypedSelector,
@@ -20,17 +20,17 @@ type FieldType = {
 export default function LoginUserForm() {
   const navigate = useNavigate();
   const dispatch = useTypedDispatch();
-  const app = useTypedSelector((state) => state.app);
+  const user = useTypedSelector((state) => state.user);
 
   const onFinish = (values: IUser) => {
-    dispatch(userActions.login(values));
+    dispatch(userAsyncActions.login(values));
   };
 
   useEffect(() => {
-    if (app.status === "success") {
+    if (user.user && user.status === "success") {
       navigate(routeNames.DASHBOARD);
     }
-  }, [app.status, navigate]);
+  }, [user.status, navigate]);
 
   return (
     <>
@@ -53,7 +53,7 @@ export default function LoginUserForm() {
 
         <Form.Item>
           <Button
-            loading={app.status === "loading"}
+            loading={user.status === "loading"}
             type="primary"
             htmlType="submit"
             style={{ marginTop: "20px" }}

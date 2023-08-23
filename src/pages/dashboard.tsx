@@ -6,12 +6,13 @@ import { routeNames } from "../route/routes";
 import { IUser } from "../types/app";
 
 import UserBots from "../components/user/userBots";
+import withUserProtectedRoute from "../components/route/withUserProtectedRoute";
 
 interface IDashboard {
   user: IUser;
 }
 
-export default function Dashboard({ user }: IDashboard) {
+export default withUserProtectedRoute(function Dashboard({ user }: IDashboard) {
   return (
     <AccountLayout
       path={routeNames.DASHBOARD}
@@ -48,4 +49,4 @@ export default function Dashboard({ user }: IDashboard) {
       </Card>
     </AccountLayout>
   );
-}
+});

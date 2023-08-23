@@ -8,11 +8,7 @@ import {
   useTypedSelector,
 } from "../../hooks/useTypedSelector.";
 import { IBot } from "../../types/app";
-import {
-  setUserBots,
-  setUserMessage,
-  setUserStatus,
-} from "../../store/app/app";
+import { botsActions } from "../../store/bots/bots";
 
 type FieldType = {
   token?: string;
@@ -24,24 +20,29 @@ interface IAddUserBotForm {
 
 export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
   const dispatch = useTypedDispatch();
-  const app = useTypedSelector((state) => state.app);
+  const user = useTypedSelector((state) => state.user.user);
+  const bots = useTypedSelector((state) => state.bots);
 
   const onFinishHandler = async (v: { token: string }) => {
-    if (!app.user) return;
-    dispatch(setUserMessage("Создание нового бота..."));
-    dispatch(setUserStatus("loading-inner"));
+    if (!user) return;
+    dispatch(botsActions.setBotsMessage("Создание нового бота..."));
+    dispatch(botsActions.setBotsStatus("loading"));
 
-    const bot: IBot = await api.createBot(v.token, app.user.username);
-    const isBotExist = app.bots.find((b) => b.token === v.token);
+    const bot: IBot = await api.createBot(v.token, user.username);
+    const isBotExist = bots.bots.find((b) => b.token === v.token);
 
     if (bot && !isBotExist) {
-      dispatch(setUserBots([...app.bots, bot]));
-      dispatch(setUserMessage("Бот успешно создан!"));
-      dispatch(setUserStatus("success"));
+      dispatch(botsActions.setBots([...bots.bots, bot]));
+      dispatch(botsActions.setBotsMessage("Бот успешно создан!"));
+      dispatch(botsActions.setBotsStatus("success"));
       onFinish();
     } else {
-      dispatch(setUserMessage("Ошибка, бот с таким токеном уже существует!"));
-      dispatch(setUserStatus("error"));
+      dispatch(
+        botsActions.setBotsMessage(
+          "Ошибка, бот с таким токеном уже существует!",
+        ),
+      );
+      dispatch(botsActions.setBotsStatus("error"));
     }
   };
 
@@ -81,7 +82,7 @@ export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
 
       <Form.Item>
         <Button
-          loading={app.status === "loading-inner"}
+          loading={bots.status === "loading"}
           type="primary"
           htmlType="submit"
           style={{ marginTop: "20px" }}

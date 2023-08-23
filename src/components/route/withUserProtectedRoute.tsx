@@ -1,4 +1,4 @@
-import { ComponentType, useEffect } from "react";
+import { ComponentType, useEffect, useRef } from "react";
 import { Navigate } from "react-router-dom";
 
 import api from "../../api/api";
@@ -6,12 +6,8 @@ import {
   useTypedDispatch,
   useTypedSelector,
 } from "../../hooks/useTypedSelector.";
-import {
-  IInitialAppState,
-  setUser,
-  setUserMessage,
-  setUserStatus,
-} from "../../store/app/app";
+
+import { IInitialUserState, userActions } from "../../store/user/user";
 import { IUser } from "../../types/app";
 import { routeNames } from "../../route/routes";
 import AppSpin from "../common/appSpin";
@@ -22,52 +18,57 @@ interface IWithUserProtectedRoute {
 
 export default function withUserProtectedRoute<
   T extends IWithUserProtectedRoute,
->(WrappedComponent: ComponentType<T>) {
+>(WruseredComponent: ComponentType<T>) {
   return (props: Omit<T, keyof IWithUserProtectedRoute>) => {
+    const test = useRef(0);
     const dispatch = useTypedDispatch();
-    const app: IInitialAppState = useTypedSelector((state) => state.app);
+    const user: IInitialUserState = useTypedSelector((state) => state.user);
     const localUser: string | null = localStorage.getItem("username");
 
     useEffect(() => {
-      async function fetchUser() {
-        if (app.user) return;
+      fetchUser();
+      test.current++;
+    }, []);
 
-        if (localUser) {
-          dispatch(setUserStatus("loading"));
-          dispatch(setUserMessage("Загрузка..."));
+    async function fetchUser() {
+      if (user.user) return;
 
-          const fetchedUser: IUser | undefined =
-            await api.getUserByUserName(localUser);
+      if (localUser) {
+        dispatch(userActions.setUserStatus("loading"));
+        dispatch(userActions.setUserMessage("Загрузка..."));
 
-          if (fetchedUser) {
-            dispatch(setUserMessage("Успешная авторизация!"));
-            dispatch(setUserStatus("success"));
-            dispatch(setUser(fetchedUser));
-          }
+        const fetchedUser: IUser | undefined =
+          await api.getUserByUserName(localUser);
+
+        if (fetchedUser) {
+          dispatch(userActions.setUserMessage("Успешная авторизация!"));
+          dispatch(userActions.setUserStatus("success"));
+          dispatch(userActions.setUser(fetchedUser));
         }
       }
-      fetchUser();
-    }, [app.user, dispatch, localUser]);
+    }
 
-    function renderContent() {
-      const isAppLoading = app.status === "loading";
-      const hasLocalUserAndNoAppUser = localUser && !app.user;
-      const hasAppUser = app.user;
-      const noAppUserAndNoLocalUser = !app.user && !localUser;
+    function renderContent(): JSX.Element {
+      const isAppLoading = user.status === "loading";
+      const hasLocalUserAndNoAppUser = localUser && !user.user;
+      const hasAppUser = user.user;
+      const noAppUserAndNoLocalUser = !user.user && !localUser;
 
       if (isAppLoading || hasLocalUserAndNoAppUser) {
         return <AppSpin />;
       }
 
       if (hasAppUser) {
-        return <WrappedComponent {...(props as T)} user={app.user} />;
+        return <WruseredComponent {...(props as T)} user={user.user} />;
       }
 
       if (noAppUserAndNoLocalUser) {
         return <Navigate to={routeNames.HOME} />;
       }
-    }
 
+      return <>Произошла непредвиденная ошибка</>;
+    }
+    console.log(test);
     return <>{renderContent()}</>;
   };
 }

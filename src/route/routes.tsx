@@ -6,17 +6,12 @@ import Dashboard from "../pages/dashboard";
 import Account from "../pages/account";
 import Login from "../pages/login";
 
-import withUserProtectedRoute from "../components/route/withUserProtectedRoute";
-
 export enum routeNames {
   HOME = "/",
   LOGIN = "/",
   DASHBOARD = "/dashboard",
   ACCOUNT = "/account",
 }
-
-const DashboardProtected = withUserProtectedRoute(Dashboard);
-const AccountProtected = withUserProtectedRoute(Account);
 
 export interface IRoute {
   path: string;
@@ -43,11 +38,11 @@ export const privateRoutes: IRoute[] = [
   ...publicRoutes,
   {
     path: routeNames.DASHBOARD,
-    element: <DashboardProtected />,
+    element: <Dashboard />,
   },
   {
     path: routeNames.ACCOUNT,
-    element: <AccountProtected />,
+    element: <Account />,
   },
 ];
 

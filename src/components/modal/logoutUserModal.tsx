@@ -1,9 +1,7 @@
 import { Modal, Typography } from "antd";
-import { useNavigate } from "react-router-dom";
 
-import { setUser, setUserMessage, setUserStatus } from "../../store/app/app";
-import { routeNames } from "../../route/routes";
 import { useTypedDispatch } from "../../hooks/useTypedSelector.";
+import userAsyncActions from "../../store/user/user-async-actions";
 
 type Props = {
   visible: boolean;
@@ -16,16 +14,10 @@ export default function LogoutUserModal({
   handleOk,
   onCancel,
 }: Props) {
-  const navigate = useNavigate();
-  const disptach = useTypedDispatch();
+  const dispatch = useTypedDispatch();
 
   const handleOkFunc = () => {
-    navigate(routeNames.LOGIN);
-    localStorage.setItem("username", "");
-    disptach(setUserStatus("idle"));
-    disptach(setUserMessage(""));
-    disptach(setUser(null));
-
+    dispatch(userAsyncActions.logout());
     handleOk();
   };
 

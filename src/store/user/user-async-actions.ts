@@ -1,21 +1,21 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import api from "../../../api/api";
+import api from "../../api/api";
 
-import { IInitialAppState } from "../app";
-import { IUser, IBot } from "../../../types/app";
+import { IUser } from "../../types/app";
 
-const userActions = {
-  login: createAsyncThunk<IInitialAppState, IUser>(
-    "user/fetchUser",
+import { IInitialUserState } from "./user";
+
+const userAsyncActions = {
+  login: createAsyncThunk<IInitialUserState, IUser>(
+    "user/loginUser",
     async (userData: IUser) => {
       const usersResponse: IUser[] = await api.getUsers();
 
-      let result: IInitialAppState = {
+      let result: IInitialUserState = {
         status: "error",
         user: null,
         message: "Пользователь не найден!",
-        bots: [],
       };
 
       const user: IUser | undefined = usersResponse.find(
@@ -25,15 +25,10 @@ const userActions = {
       if (!user) return result;
 
       if (user.password === userData.password) {
-        const userBots: IBot[] = await api.getUserBotsByUserName(
-          userData.username,
-        );
-
         result = {
           status: "success",
           user: user,
           message: "Вы успешно вошли на сайт.",
-          bots: userBots,
         };
 
         localStorage.setItem("username", user.username);
@@ -44,13 +39,26 @@ const userActions = {
         status: "error",
         user: user,
         message: "Неверный пароль.",
-        bots: [],
       };
 
       return result;
     },
   ),
+  logout: createAsyncThunk<IInitialUserState>("user/logoutUser", async () => {
+    return await new Promise((resolve) =>
+      setTimeout(() => {
+        localStorage.setItem("username", "");
+
+        const result: IInitialUserState = {
+          status: "success",
+          user: null,
+          message: "Успешно!",
+        };
+
+        resolve(result);
+      }, 1000),
+    );
+  }),
 };
 
-export const { login } = userActions;
-export default userActions;
+export default userAsyncActions;

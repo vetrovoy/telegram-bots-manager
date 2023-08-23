@@ -1,35 +1,33 @@
 import { Modal, Typography } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
+
+import { useTypedDispatch } from "../../hooks/useTypedSelector.";
+import userAsyncActions from "../../store/user/user-async-actions";
 
 type Props = {
   username: string;
 };
 
 export default function RemoveUserModal({ username }: Props) {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const dispatch = useTypedDispatch();
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleOk = () => {
     setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
+    dispatch(userAsyncActions.logout());
   };
 
   return (
     <>
-      <Typography.Link type="secondary" onClick={showModal}>
+      <Typography.Link type="secondary" onClick={() => setIsModalOpen(true)}>
         Удалить профиль
       </Typography.Link>
       <Modal
         title="Вы уверены, что хотите полностью удалить профиль?"
         open={isModalOpen}
         onOk={handleOk}
-        onCancel={handleCancel}
+        onCancel={() => setIsModalOpen(false)}
         okText={"Да"}
         cancelText={"Нет"}
       >

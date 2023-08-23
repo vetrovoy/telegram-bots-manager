@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Menu, MenuProps } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import AddUserBotFormModal from "../../modal/addUserBotFormModal";
 import LogoutUserModal from "../../modal/logoutUserModal";
@@ -8,6 +8,8 @@ import LogoutUserModal from "../../modal/logoutUserModal";
 import { routeNames } from "../../../route/routes";
 
 export default function HeaderMenu() {
+  const location = useLocation();
+
   const headerMenuRoutes: MenuProps["items"] = useMemo(() => {
     return [
       {
@@ -52,6 +54,7 @@ export default function HeaderMenu() {
         <Menu
           theme="dark"
           mode="horizontal"
+          selectedKeys={[location.pathname]}
           defaultSelectedKeys={[routeNames.DASHBOARD]}
           items={headerMenuRoutes}
           onClick={handleMenuItemClick}

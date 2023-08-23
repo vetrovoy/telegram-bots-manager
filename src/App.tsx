@@ -1,34 +1,14 @@
-import { useEffect } from "react";
-
 import { Route, Routes } from "react-router-dom";
 
-import { Layout, message } from "antd";
+import { Layout } from "antd";
 
 import { routes } from "./route/routes";
-import { useTypedSelector } from "./hooks/useTypedSelector.";
+import MessagesHolder from "./components/common/messagesHolder";
 
 export default function App() {
-  const app = useTypedSelector((state) => state.app);
-
-  const [messageApi, contextHolder] = message.useMessage();
-
-  useEffect(() => {
-    if (
-      app.status === "success" ||
-      app.status === "error" ||
-      app.status === "loading" ||
-      app.status === "loading-inner"
-    ) {
-      messageApi.open({
-        type: app.status === "loading-inner" ? "loading" : app.status,
-        content: app.message,
-      });
-    }
-  }, [app.status]);
-
   return (
     <>
-      {contextHolder}
+      <MessagesHolder />
       <Layout style={{ minHeight: "100vh" }}>
         <Routes>
           {routes.map((route) => (

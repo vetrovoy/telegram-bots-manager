@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Badge, Popover, Space, Table } from "antd";
 
 import { ColumnsType } from "antd/es/table";
@@ -8,7 +9,7 @@ import { IBot } from "../../types/app";
 import BotPopoverSettings from "./botPopoverSettings";
 
 type Props = {
-  loading: boolean;
+  loading?: boolean;
   bots: IBot[];
 };
 
@@ -77,8 +78,7 @@ export default function BotsTable({ bots, loading }: Props) {
     return sortedData;
   };
 
-  const data: DataType[] = formattedData();
-
+  const data: DataType[] = useMemo(() => formattedData(), [bots]);
   return (
     <Table
       loading={loading}
