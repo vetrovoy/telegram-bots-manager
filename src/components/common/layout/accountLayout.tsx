@@ -5,13 +5,17 @@ import { Layout, Breadcrumb } from "antd";
 import Sidebar from "../sidebar";
 import Header from "../header/header";
 
-import { routeNames } from "../../../route/routes";
 import { useTranslate } from "../../../hooks/useTranslate";
+
+export type Breadcrumbs = {
+  path: string;
+  title: string;
+};
 
 interface IAccountLayout {
   title: string;
   subtitle: string;
-  path: string;
+  breadcrumbs?: Breadcrumbs[];
   children?: React.ReactNode;
 }
 
@@ -19,7 +23,7 @@ export default function AccountLayout({
   children,
   title,
   subtitle,
-  path,
+  breadcrumbs,
 }: IAccountLayout) {
   const t = useTranslate();
   return (
@@ -30,14 +34,17 @@ export default function AccountLayout({
         <Header title={title} subtitle={subtitle} />
 
         <Layout style={{ margin: "16px 34px" }}>
-          <Breadcrumb style={{ marginBottom: "34px" }}>
-            <Breadcrumb.Item>
-              <Link to={routeNames.HOME}>{t("Главная")}</Link>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>
-              <Link to={path}>{title}</Link>
-            </Breadcrumb.Item>
-          </Breadcrumb>
+          {breadcrumbs && (
+            <Breadcrumb style={{ marginBottom: "34px" }}>
+              {breadcrumbs.map(({ title, path }) => {
+                return (
+                  <Breadcrumb.Item key={path}>
+                    <Link to={path}>{t(title)}</Link>
+                  </Breadcrumb.Item>
+                );
+              })}
+            </Breadcrumb>
+          )}
 
           {children}
         </Layout>

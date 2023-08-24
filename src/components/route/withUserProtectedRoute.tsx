@@ -1,4 +1,4 @@
-import { ComponentType, useEffect, useRef } from "react";
+import { ComponentType, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 import api from "../../api/api";
@@ -10,8 +10,8 @@ import {
 import { IInitialUserState, userActions } from "../../store/user/user";
 import { IUser } from "../../types/app";
 import { routeNames } from "../../route/routes";
-import AppSpin from "../common/appSpin";
 import { useTranslate } from "../../hooks/useTranslate";
+import AppSpin from "../common/appSpin";
 
 interface IWithUserProtectedRoute {
   user: IUser | null;
@@ -19,7 +19,7 @@ interface IWithUserProtectedRoute {
 
 export default function withUserProtectedRoute<
   T extends IWithUserProtectedRoute,
->(WruseredComponent: ComponentType<T>) {
+>(WrappedComponent: ComponentType<T>) {
   return (props: Omit<T, keyof IWithUserProtectedRoute>) => {
     const t = useTranslate();
     const dispatch = useTypedDispatch();
@@ -49,24 +49,24 @@ export default function withUserProtectedRoute<
     }
 
     function renderContent(): JSX.Element {
-      const isAppLoading = user.status === "loading";
-      const hasLocalUserAndNoAppUser = localUser && !user.user;
-      const hasAppUser = user.user;
-      const noAppUserAndNoLocalUser = !user.user && !localUser;
+      const isUserLoading = user.status === "loading";
+      const hasLocalUserAndNoUser = localUser && !user.user;
+      const hasUser = user.user;
+      const noUserAndNoLocalUser = !user.user && !localUser;
 
-      if (isAppLoading || hasLocalUserAndNoAppUser) {
+      if (isUserLoading || hasLocalUserAndNoUser) {
         return <AppSpin />;
       }
 
-      if (hasAppUser) {
-        return <WruseredComponent {...(props as T)} user={user.user} />;
+      if (hasUser) {
+        return <WrappedComponent {...(props as T)} user={user.user} />;
       }
 
-      if (noAppUserAndNoLocalUser) {
-        return <Navigate to={routeNames.HOME} />;
+      if (noUserAndNoLocalUser) {
+        return <Navigate to={routeNames.LOGIN} />;
       }
 
-      return <>Произошла непредвиденная ошибка</>;
+      return <Navigate to={routeNames.ERROR} />;
     }
     return <>{renderContent()}</>;
   };

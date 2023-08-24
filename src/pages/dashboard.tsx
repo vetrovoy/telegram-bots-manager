@@ -1,6 +1,8 @@
 import { Card, Tooltip, Typography } from "antd";
 
-import AccountLayout from "../components/common/layout/accountLayout";
+import AccountLayout, {
+  Breadcrumbs,
+} from "../components/common/layout/accountLayout";
 
 import { routeNames } from "../route/routes";
 import { IUser } from "../types/app";
@@ -16,9 +18,14 @@ interface IDashboard {
 export default withUserProtectedRoute(function Dashboard({ user }: IDashboard) {
   const t = useTranslate();
 
+  const breadcrumbs: Breadcrumbs[] = [
+    { path: routeNames.HOME, title: "Главная" },
+    { path: routeNames.DASHBOARD, title: "Мои боты" },
+  ];
+
   return (
     <AccountLayout
-      path={routeNames.DASHBOARD}
+      breadcrumbs={breadcrumbs}
       title={t("Мои боты")}
       subtitle={t("Управляйте всеми ботами из этой панели")}
     >

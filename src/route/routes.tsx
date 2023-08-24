@@ -5,12 +5,16 @@ import Home from "../pages/home";
 import Dashboard from "../pages/dashboard";
 import Account from "../pages/account";
 import Login from "../pages/login";
+import Fallback from "../pages/fallback";
+import Bots from "../pages/bot";
 
 export enum routeNames {
+  ERROR = "/404",
   HOME = "/",
   LOGIN = "/",
   DASHBOARD = "/dashboard",
   ACCOUNT = "/account",
+  BOTS = "/dashboard/:slug",
 }
 
 export interface IRoute {
@@ -22,7 +26,11 @@ export interface IRoute {
 export const publicRoutes: IRoute[] = [
   {
     path: "*",
-    element: <Navigate to={routeNames.HOME} />,
+    element: <Navigate to={routeNames.ERROR} />,
+  },
+  {
+    path: routeNames.ERROR,
+    element: <Fallback />,
   },
   {
     path: routeNames.HOME,
@@ -43,6 +51,10 @@ export const privateRoutes: IRoute[] = [
   {
     path: routeNames.ACCOUNT,
     element: <Account />,
+  },
+  {
+    path: routeNames.BOTS,
+    element: <Bots />,
   },
 ];
 

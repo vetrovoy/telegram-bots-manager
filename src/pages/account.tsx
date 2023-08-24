@@ -1,6 +1,8 @@
 import { Card, Col, Row } from "antd";
 
-import AccountLayout from "../components/common/layout/accountLayout";
+import AccountLayout, {
+  Breadcrumbs,
+} from "../components/common/layout/accountLayout";
 
 import { routeNames } from "../route/routes";
 import EditUserUsername from "../components/form/editUserUsername";
@@ -18,10 +20,16 @@ interface IAccount {
 
 export default withUserProtectedRoute(function Account({ user }: IAccount) {
   const t = useTranslate();
+
+  const breadcrumbs: Breadcrumbs[] = [
+    { path: routeNames.HOME, title: "Главная" },
+    { path: routeNames.ACCOUNT, title: "Аккаунт" },
+  ];
+
   return (
     <>
       <AccountLayout
-        path={routeNames.ACCOUNT}
+        breadcrumbs={breadcrumbs}
         title={t("Личный кабинет")}
         subtitle={t("Управляйте своим аккаунтом из этой панели")}
       >

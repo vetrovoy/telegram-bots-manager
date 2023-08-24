@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 
-import { Layout, Typography } from "antd";
+import { Layout, Result } from "antd";
 
 import { routeNames } from "../route/routes";
+import { useTranslate } from "../hooks/useTranslate";
 
 export default function Fallback() {
+  const t = useTranslate();
   return (
     <Layout>
       <Layout.Content
@@ -17,14 +19,12 @@ export default function Fallback() {
           margin: "0 16px",
         }}
       >
-        <Typography.Title>
-          Страница найдена или у вас нет разрешения
-        </Typography.Title>
-        <Typography.Title>
-          <Typography.Link style={{ fontSize: 26 }}>
-            <Link to={routeNames.HOME}>Перейти на главную</Link>
-          </Typography.Link>
-        </Typography.Title>
+        <Result
+          status="404"
+          title="404"
+          subTitle={<>{t("Запрашиваемая страница не существует")}</>}
+          extra={<Link to={routeNames.HOME}>{t("Вернуться на главную")}</Link>}
+        />
       </Layout.Content>
     </Layout>
   );

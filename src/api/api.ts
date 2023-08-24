@@ -2,13 +2,16 @@ import axios, { AxiosResponse } from "axios";
 
 import { IUser, IBot } from "../types/app";
 
+const API_ROOT = "http://localhost:3000/";
+
 export class Api {
   public async getUsers(): Promise<IUser[]> {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const response: AxiosResponse<IUser[]> =
-        await axios.get<IUser[]>(`./data/users.json`);
+      const response: AxiosResponse<IUser[]> = await axios.get<IUser[]>(
+        API_ROOT + `/data/users.json`,
+      );
       return response.data;
     } catch (error: any) {
       throw new Error(`Error while fetching users: ${error.message}`);
@@ -35,8 +38,9 @@ export class Api {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const response: AxiosResponse<IBot[]> =
-        await axios.get<IBot[]>(`./data/bots.json`);
+      const response: AxiosResponse<IBot[]> = await axios.get<IBot[]>(
+        API_ROOT + `/data/bots.json`,
+      );
       return response.data;
     } catch (error: any) {
       throw new Error(`Error while fetching users: ${error.message}`);

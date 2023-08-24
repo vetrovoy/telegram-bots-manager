@@ -3,12 +3,14 @@ import { Badge, Descriptions } from "antd";
 import type { DescriptionsProps } from "antd";
 
 import { useTranslate } from "../../hooks/useTranslate";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 type Props = {
   username: string;
 };
 
 export default function UserInformation({ username }: Props) {
+  const bots = useTypedSelector((state) => state.bots.bots);
   const t = useTranslate();
 
   const items: DescriptionsProps["items"] = useMemo(() => {
@@ -28,11 +30,11 @@ export default function UserInformation({ username }: Props) {
       {
         key: "3",
         label: t("Моих ботов"),
-        children: "0",
+        children: bots.length,
         span: 4,
       },
     ];
-  }, [t]);
+  }, [t, bots]);
 
   return <Descriptions bordered items={items} />;
 }

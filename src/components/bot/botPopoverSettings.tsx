@@ -31,7 +31,7 @@ export default function BotPopoverSettings({ bot }: Props) {
   const headerMenuRoutes: MenuProps["items"] = useMemo(() => {
     return [
       {
-        key: `${routeNames.ACCOUNT}/${bot.id}`,
+        key: `${routeNames.DASHBOARD}/${bot.bot_username}`,
         label: t("Настройки"),
         icon: <SettingOutlined />,
       },

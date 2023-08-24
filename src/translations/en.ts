@@ -74,4 +74,10 @@ export const en = {
     "Provide the correct bot token, for example",
   "Создание нового бота...": "Creating new bot...",
   "Бот успешно создан!": "Bot successfully created!",
+  "Вернуться на главную": "Back to home page",
+  "Запрашиваемая страница не существует":
+    "Sorry, the page you visited does not exist.",
+  "Настройте вашего бота и зарабатывайте больше":
+    "Set up your bot and earn more",
+  "Общие настройки бота": "General bot settings",
 };
