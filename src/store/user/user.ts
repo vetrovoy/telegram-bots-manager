@@ -26,7 +26,7 @@ const userLoginExtraReducers = (
 ) => {
   return [
     builder.addCase(userAsyncActions.login.pending, (state) => {
-      state.message = "Загрузка...";
+      state.message = "Загрузка";
       state.status = "loading";
     }),
     builder.addCase(
@@ -47,7 +47,7 @@ const userLogoutExtraReducers = (
 ) => {
   return [
     builder.addCase(userAsyncActions.logout.pending, (state) => {
-      state.message = "Загрузка...";
+      state.message = "Загрузка";
       state.status = "loading";
     }),
     builder.addCase(
