@@ -31,6 +31,7 @@ export const en = {
     "You do not have access to any bots",
   Настройки: "Settings",
   Включить: "Turn On",
+  Выключить: "Turn Off",
   Удалить: "Delete",
   "Дата создания": "Date",
   "Удаление...": "Deleting...",
@@ -38,13 +39,17 @@ export const en = {
   "удален!": "deleted!",
   "выключен!": "turned off!",
   "включен!": "turned on!",
-  "Бот с именем удален!": "Bot with name",
+  "Бот с именем": "Bot with name",
   Выйти: "Exit",
   Главная: "Home",
   "Токен - официальный адрес бота в Telegram":
     "Token - official address of the bot in Telegram",
   Токен: "Token",
   Принять: "Submit",
+  "Вы уверены, что хотите полностью удалить профиль?":
+    "Are you sure you want to delete your profile completely?",
+  "Вы уверены, что хотите выйти?":
+    "Are you sure you want to exit your profile?",
   "Каждый новый бот по умолчанию находится на пробном тарифе. Через 14 дней пробный тариф будет завершён и некоторые функции могут стать недоступны (если количество пользователей превысит 100 человек). Чтобы функционал бота остался полным необходимо будет приобрести тариф Pro":
     "Each new bot is initially on a trial tariff. After 14 days, the trial tariff will end and some features may become unavailable (if the number of users exceeds 100 people). To keep the bot's functionality complete, it will be necessary to purchase the Pro tariff.",
   "Выберите язык приложения": "Choose the language of the builder",
@@ -52,17 +57,21 @@ export const en = {
     "We ask you to enter the old (current) password for the security of your profile",
   "Введите имя пользователя!": "Please provide a username!",
   "Вы можете задать логин, чтобы в дальнейшем использовать его для входа на сайт либо для передачи доступа.":
-    "Can you provide a login that can be used for future website logins or access sharing?",
+    "You can provide a login that can be used for future website logins or access sharing",
   Сохранить: "Save",
   "Введите пароль!": "Please provide a password!",
   "Ваша сессия сбросится, и вам придется войти заново":
     "Your session will be reset and you will have to log in again.",
   "Удалить профиль": "Delete account",
-  "Это действие нельзя будет отменить.": "This action cannot be undone.",
-  "Произошла непредвиденная ошибка.": "An unexpected error occurred.",
+  "Это действие нельзя будет отменить": "This action cannot be undone",
+  "Произошла непредвиденная ошибка": "An unexpected error occurred",
   "Вы ещё не создали ни одного бота": "You haven't created any bots yet.",
   "Создать бота": "Create new bot",
   Депозит: "Deposit",
   "Моих ботов": "My bots",
   Статус: "Status",
+  "Укажите корректный токен бота, например":
+    "Provide the correct bot token, for example",
+  "Создание нового бота...": "Creating new bot...",
+  "Бот успешно создан!": "Bot successfully created!",
 };

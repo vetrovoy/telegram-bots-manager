@@ -64,14 +64,14 @@ export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
       </Typography.Text>
 
       <Form.Item<FieldType>
-        label="Токен"
+        label={t("Токен")}
         name="token"
         rules={[
           rules.required(),
           rules.isValidToken(
-            t(
-              "Укажите корректный токен бота, например, 1234567890:ABC-DEF1234ghIkl-zyx57W2v1u123ew11",
-            ),
+            `${t(
+              "Укажите корректный токен бота, например",
+            )}, 1234567890:ABC-DEF1234ghIkl-zyx57W2v1u123ew11`,
           ),
         ]}
       >

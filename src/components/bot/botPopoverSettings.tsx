@@ -99,7 +99,7 @@ export default function BotPopoverSettings({ bot }: Props) {
         const newBot: IBot = { ...curBot, status: "default" };
         dispatch(
           botsActions.setBotsMessage(
-            `Бот и именем ${newBot.bot_name} выключен!`,
+            `${t("Бот с именем")} ${newBot.bot_name} ${t("выключен!")}`,
           ),
         );
         newBots.push(newBot);
@@ -107,7 +107,7 @@ export default function BotPopoverSettings({ bot }: Props) {
         const newBot: IBot = { ...curBot, status: "processing" };
         dispatch(
           botsActions.setBotsMessage(
-            `Бот и именем ${newBot.bot_name} включен!`,
+            `${t("Бот с именем")} ${newBot.bot_name} ${t("включен!")}`,
           ),
         );
         newBots.push(newBot);

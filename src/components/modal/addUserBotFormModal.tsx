@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Modal } from "antd";
 
 import AddBotForm from "../form/addUserBotForm";
+import { useTranslate } from "../../hooks/useTranslate";
 
 interface IAddUserBotFormModal {
   title: string;
@@ -12,6 +13,7 @@ export default function AddUserBotFormModal({
   title,
   style,
 }: IAddUserBotFormModal) {
+  const t = useTranslate();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const showModal = () => {
@@ -32,7 +34,7 @@ export default function AddUserBotFormModal({
         {title}
       </Button>
       <Modal
-        title="Токен Telegram API"
+        title={`${t("Токен")} Telegram API`}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
