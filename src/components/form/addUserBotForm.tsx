@@ -6,9 +6,10 @@ import api from "../../api/api";
 import {
   useTypedDispatch,
   useTypedSelector,
-} from "../../hooks/useTypedSelector.";
+} from "../../hooks/useTypedSelector";
 import { IBot } from "../../types/app";
 import { botsActions } from "../../store/bots/bots";
+import { useTranslate } from "../../hooks/useTranslate";
 
 type FieldType = {
   token?: string;
@@ -19,13 +20,15 @@ interface IAddUserBotForm {
 }
 
 export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
+  const t = useTranslate();
+
   const dispatch = useTypedDispatch();
   const user = useTypedSelector((state) => state.user.user);
   const bots = useTypedSelector((state) => state.bots);
 
   const onFinishHandler = async (v: { token: string }) => {
     if (!user) return;
-    dispatch(botsActions.setBotsMessage("Создание нового бота..."));
+    dispatch(botsActions.setBotsMessage(t("Создание нового бота...")));
     dispatch(botsActions.setBotsStatus("loading"));
 
     const bot: IBot = await api.createBot(v.token, user.username);
@@ -33,13 +36,13 @@ export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
 
     if (bot && !isBotExist) {
       dispatch(botsActions.setBots([...bots.bots, bot]));
-      dispatch(botsActions.setBotsMessage("Бот успешно создан!"));
+      dispatch(botsActions.setBotsMessage(t("Бот успешно создан!")));
       dispatch(botsActions.setBotsStatus("success"));
       onFinish();
     } else {
       dispatch(
         botsActions.setBotsMessage(
-          "Ошибка, бот с таким токеном уже существует!",
+          t("Ошибка, бот с таким токеном уже существует!"),
         ),
       );
       dispatch(botsActions.setBotsStatus("error"));
@@ -57,7 +60,7 @@ export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
         type="secondary"
         style={{ display: "inline-block", marginBottom: 20 }}
       >
-        Токен - официальный адрес бота в Telegram
+        {t("Токен - официальный адрес бота в Telegram")}
       </Typography.Text>
 
       <Form.Item<FieldType>
@@ -66,7 +69,9 @@ export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
         rules={[
           rules.required(),
           rules.isValidToken(
-            "Укажите корректный токен бота, например, 1234567890:ABC-DEF1234ghIkl-zyx57W2v1u123ew11",
+            t(
+              "Укажите корректный токен бота, например, 1234567890:ABC-DEF1234ghIkl-zyx57W2v1u123ew11",
+            ),
           ),
         ]}
       >
@@ -74,10 +79,10 @@ export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
       </Form.Item>
 
       <Typography.Text type="secondary">
-        ⚠️ Каждый новый бот по умолчанию находится на пробном тарифе. Через 14
-        дней пробный тариф будет завершён и некоторые функции могут стать
-        недоступны (если количество пользователей превысит 100 человек). Чтобы
-        функционал бота остался полным необходимо будет приобрести тариф Pro
+        ⚠️{" "}
+        {t(
+          `Каждый новый бот по умолчанию находится на пробном тарифе. Через 14 дней пробный тариф будет завершён и некоторые функции могут стать недоступны (если количество пользователей превысит 100 человек). Чтобы функционал бота остался полным необходимо будет приобрести тариф Pro`,
+        )}
       </Typography.Text>
 
       <Form.Item>
@@ -87,7 +92,7 @@ export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
           htmlType="submit"
           style={{ marginTop: "20px" }}
         >
-          Принять
+          {t("Принять")}
         </Button>
       </Form.Item>
     </Form>

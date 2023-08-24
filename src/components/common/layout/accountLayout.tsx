@@ -6,6 +6,7 @@ import Sidebar from "../sidebar";
 import Header from "../header/header";
 
 import { routeNames } from "../../../route/routes";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 interface IAccountLayout {
   title: string;
@@ -20,6 +21,7 @@ export default function AccountLayout({
   subtitle,
   path,
 }: IAccountLayout) {
+  const t = useTranslate();
   return (
     <Layout>
       <Sidebar />
@@ -30,7 +32,7 @@ export default function AccountLayout({
         <Layout style={{ margin: "16px 34px" }}>
           <Breadcrumb style={{ marginBottom: "34px" }}>
             <Breadcrumb.Item>
-              <Link to={routeNames.HOME}>Главная</Link>
+              <Link to={routeNames.HOME}>{t("Главная")}</Link>
             </Breadcrumb.Item>
             <Breadcrumb.Item>
               <Link to={path}>{title}</Link>

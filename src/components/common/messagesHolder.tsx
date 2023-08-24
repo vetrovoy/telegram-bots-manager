@@ -2,9 +2,12 @@ import { useEffect } from "react";
 
 import { message } from "antd";
 
-import { useTypedSelector } from "../../hooks/useTypedSelector.";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useTranslate } from "../../hooks/useTranslate";
 
 export default function MessagesHolder() {
+  const t = useTranslate();
+
   const bots = useTypedSelector((state) => state.bots);
   // const user = useTypedSelector((state) => state.user);
 
@@ -26,7 +29,7 @@ export default function MessagesHolder() {
     if (bots.status !== "idle") {
       botsMessageApi.open({
         type: bots.status,
-        content: bots.message,
+        content: t(bots.message),
       });
 
       return;

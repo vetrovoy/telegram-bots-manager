@@ -14,14 +14,16 @@ import { IBot } from "../../types/app";
 import {
   useTypedDispatch,
   useTypedSelector,
-} from "../../hooks/useTypedSelector.";
+} from "../../hooks/useTypedSelector";
 import { botsActions } from "../../store/bots/bots";
+import { useTranslate } from "../../hooks/useTranslate";
 
 type Props = {
   bot: IBot;
 };
 
 export default function BotPopoverSettings({ bot }: Props) {
+  const t = useTranslate();
   const bots = useTypedSelector((state) => state.bots.bots);
   const dispatch = useTypedDispatch();
   const navigate = useNavigate();
@@ -30,12 +32,12 @@ export default function BotPopoverSettings({ bot }: Props) {
     return [
       {
         key: `${routeNames.ACCOUNT}/${bot.id}`,
-        label: "Настройки",
+        label: t("Настройки"),
         icon: <SettingOutlined />,
       },
       {
         key: bot.status === "processing" ? "OFF" : "ON",
-        label: bot.status === "processing" ? "Выключить" : "Включить",
+        label: bot.status === "processing" ? t("Выключить") : t("Включить"),
         icon: (
           <PoweroffOutlined
             style={{ color: bot.status === "processing" ? "red" : "green" }}
@@ -44,7 +46,7 @@ export default function BotPopoverSettings({ bot }: Props) {
       },
       {
         key: "DELETE",
-        label: "Удалить",
+        label: t("Удалить"),
         icon: <DeleteOutlined style={{ color: "red" }} />,
       },
     ];
@@ -68,14 +70,16 @@ export default function BotPopoverSettings({ bot }: Props) {
   };
 
   async function deleteBot() {
-    dispatch(botsActions.setBotsMessage("Удаление..."));
+    dispatch(botsActions.setBotsMessage(t("Удаление...")));
     dispatch(botsActions.setBotsStatus("loading"));
 
     setTimeout(() => {
       const filtred = bots.filter((b) => b.token !== bot.token);
       dispatch(botsActions.setBots(filtred));
       dispatch(
-        botsActions.setBotsMessage(`Бот с именем ${bot.bot_name} удален!`),
+        botsActions.setBotsMessage(
+          `${t("Бот с именем")} ${bot.bot_name} ${t("удален!")}`,
+        ),
       );
       dispatch(botsActions.setBotsStatus("success"));
     }, 1000);

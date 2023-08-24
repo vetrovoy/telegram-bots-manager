@@ -10,23 +10,25 @@ import EditUserLanguage from "../components/form/editUserLanguage";
 import { IUser } from "../types/app";
 import RemoveUserModal from "../components/modal/removeUserModal";
 import withUserProtectedRoute from "../components/route/withUserProtectedRoute";
+import { useTranslate } from "../hooks/useTranslate";
 
 interface IAccount {
   user: IUser;
 }
 
 export default withUserProtectedRoute(function Account({ user }: IAccount) {
+  const t = useTranslate();
   return (
     <>
       <AccountLayout
         path={routeNames.ACCOUNT}
-        title="Личный кабинет"
-        subtitle="Управляйте своим аккаунтом из этой панели"
+        title={t("Личный кабинет")}
+        subtitle={t("Управляйте своим аккаунтом из этой панели")}
       >
         <Row gutter={16}>
           <Col span={12} style={{ marginBottom: 16 }}>
             <Card
-              title="Основные сведения профиля"
+              title={t("Основные сведения профиля")}
               bordered={false}
               extra={<RemoveUserModal username={user.username} />}
             >
@@ -34,18 +36,18 @@ export default withUserProtectedRoute(function Account({ user }: IAccount) {
             </Card>
           </Col>
           <Col span={12}>
-            <Card title="Изменить логин" bordered={false}>
+            <Card title={t("Изменить логин")} bordered={false}>
               <EditUserUsername username={user.username} />
             </Card>
           </Col>
           <Col span={12}>
-            <Card title="Изменить пароль" bordered={false}>
+            <Card title={t("Изменить пароль")} bordered={false}>
               <EditUserPassword user={user} />
             </Card>
           </Col>
           <Col span={12}>
-            <Card title="Язык" bordered={false}>
-              <EditUserLanguage username={user.username} />
+            <Card title={t("Язык")} bordered={false}>
+              <EditUserLanguage user={user} />
             </Card>
           </Col>
         </Row>

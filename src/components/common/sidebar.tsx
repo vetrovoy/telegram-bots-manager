@@ -11,6 +11,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { routeNames } from "../../route/routes";
 import LogoutUserModal from "../modal/logoutUserModal";
+import { useTranslate } from "../../hooks/useTranslate";
 
 const { Sider } = Layout;
 
@@ -31,13 +32,15 @@ function getItem(
 }
 
 export default function Sidebar() {
+  const t = useTranslate();
+
   const sidebarMenuRoutes: MenuItem[] = useMemo(() => {
     return [
       getItem(localStorage.getItem("username"), "USERNAME", <UserOutlined />, [
-        getItem("Личный кабинет", routeNames.ACCOUNT),
+        getItem(t("Личный кабинет"), routeNames.ACCOUNT),
       ]),
-      getItem("Мои боты", routeNames.DASHBOARD, <DesktopOutlined />),
-      getItem("Выйти", "EXIT", <LogoutOutlined />),
+      getItem(t("Мои боты"), routeNames.DASHBOARD, <DesktopOutlined />),
+      getItem(t("Выйти"), "EXIT", <LogoutOutlined />),
     ];
   }, []);
 

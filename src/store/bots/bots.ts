@@ -27,7 +27,7 @@ const botsExtraReducers = (
 ) => {
   return [
     builder.addCase(botsAsyncActions.getBots.pending, (state) => {
-      state.message = "Загрузка";
+      state.message = "Загрузка...";
       state.status = "loading";
     }),
     builder.addCase(

@@ -1,13 +1,15 @@
 import { Button, Form, Input, Typography } from "antd";
 
 import { rules } from "../../utils/rules";
-import { useTypedSelector } from "../../hooks/useTypedSelector.";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useTranslate } from "../../hooks/useTranslate";
 
 type Props = {
   username: string;
 };
 
 export default function EditUserUsername({ username }: Props) {
+  const t = useTranslate();
   const user = useTypedSelector((state) => state.user);
 
   const onFinish = () => {};
@@ -19,8 +21,9 @@ export default function EditUserUsername({ username }: Props) {
           type="secondary"
           style={{ display: "inline-block", marginBottom: 16 }}
         >
-          Вы можете задать логин, чтобы в дальнейшем использовать его для входа
-          на сайт либо для передачи доступа.
+          {t(
+            "Вы можете задать логин, чтобы в дальнейшем использовать его для входа на сайт либо для передачи доступа.",
+          )}
         </Typography.Text>
 
         <Form.Item
@@ -38,7 +41,7 @@ export default function EditUserUsername({ username }: Props) {
             htmlType="submit"
             style={{ marginTop: "20px" }}
           >
-            Сохранить
+            {t("Сохранить")}
           </Button>
         </Form.Item>
       </Form>

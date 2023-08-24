@@ -2,11 +2,13 @@
   {
     "id": 1,
     "username": "user",
-    "password": "password"
+    "password": "password",
+    "language": "en"
   },
   {
     "id": 2,
     "username": "admin",
-    "password": "admin"
+    "password": "admin",
+    "language": "ru"
   }
 ]

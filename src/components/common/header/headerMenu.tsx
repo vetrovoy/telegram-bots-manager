@@ -6,8 +6,10 @@ import AddUserBotFormModal from "../../modal/addUserBotFormModal";
 import LogoutUserModal from "../../modal/logoutUserModal";
 
 import { routeNames } from "../../../route/routes";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 export default function HeaderMenu() {
+  const t = useTranslate();
   const location = useLocation();
 
   const headerMenuRoutes: MenuProps["items"] = useMemo(() => {
@@ -18,11 +20,11 @@ export default function HeaderMenu() {
       },
       {
         key: routeNames.ACCOUNT,
-        label: `Личный кабинет`,
+        label: t(`Личный кабинет`),
       },
       {
         key: "EXIT",
-        label: `Выйти`,
+        label: t(`Выйти`),
       },
     ];
   }, []);
@@ -49,7 +51,7 @@ export default function HeaderMenu() {
       >
         <AddUserBotFormModal
           style={{ display: "block", height: "64px", borderRadius: 0 }}
-          title="Создать бота"
+          title={t("Создать бота")}
         />
         <Menu
           theme="dark"

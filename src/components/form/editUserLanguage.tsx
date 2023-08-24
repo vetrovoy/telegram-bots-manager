@@ -1,10 +1,19 @@
 import { Select, Typography } from "antd";
 
-type Props = { username: string };
+import { useTranslate } from "../../hooks/useTranslate";
+import { useTypedDispatch } from "../../hooks/useTypedSelector";
+import { userActions } from "../../store/user/user";
+import { IUser } from "../../types/app";
 
-export default function EditUserLanguage({ username }: Props) {
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+type Props = { user: IUser };
+
+export default function EditUserLanguage({ user }: Props) {
+  const dispatch = useTypedDispatch();
+  const t = useTranslate();
+
+  const handleChange = (value: "ru" | "en") => {
+    const userWithChangedLang = { ...user, language: value };
+    dispatch(userActions.setUser(userWithChangedLang));
   };
 
   return (
@@ -13,16 +22,16 @@ export default function EditUserLanguage({ username }: Props) {
         type="secondary"
         style={{ display: "inline-block", marginBottom: 16 }}
       >
-        Выберите язык конструктора
+        {t("Выберите язык приложения")}
       </Typography.Text>
 
       <Select
-        defaultValue="Русский"
+        defaultValue={user?.language}
         style={{ width: 190, display: "block" }}
         onChange={handleChange}
         options={[
-          { value: "russian", label: "Русский" },
-          { value: "english", label: "Английский" },
+          { value: "ru", label: t("Русский") },
+          { value: "en", label: t("Английский") },
         ]}
       />
     </>

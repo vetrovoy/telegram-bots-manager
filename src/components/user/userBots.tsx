@@ -9,14 +9,16 @@ import BotsTable from "../bot/BotsTable";
 import {
   useTypedDispatch,
   useTypedSelector,
-} from "../../hooks/useTypedSelector.";
+} from "../../hooks/useTypedSelector";
 import botsAsyncActions from "../../store/bots/bots-async-actions";
+import { useTranslate } from "../../hooks/useTranslate";
 
 type Props = {
   user: IUser;
 };
 
 export default function UserBots({ user }: Props) {
+  const t = useTranslate();
   const dispatch = useTypedDispatch();
   const bots = useTypedSelector((state) => state.bots);
 
@@ -34,12 +36,12 @@ export default function UserBots({ user }: Props) {
       ) : (
         <>
           <Typography.Text type="secondary">
-            Вы ещё не создали ни одного бота
+            {t("Вы ещё не создали ни одного бота")}
           </Typography.Text>
 
           <AddUserBotFormModal
             style={{ display: "block", marginTop: 30 }}
-            title="Создать бота"
+            title={t("Создать бота")}
           />
         </>
       )}

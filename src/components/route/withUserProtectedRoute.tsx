@@ -5,12 +5,13 @@ import api from "../../api/api";
 import {
   useTypedDispatch,
   useTypedSelector,
-} from "../../hooks/useTypedSelector.";
+} from "../../hooks/useTypedSelector";
 
 import { IInitialUserState, userActions } from "../../store/user/user";
 import { IUser } from "../../types/app";
 import { routeNames } from "../../route/routes";
 import AppSpin from "../common/appSpin";
+import { useTranslate } from "../../hooks/useTranslate";
 
 interface IWithUserProtectedRoute {
   user: IUser | null;
@@ -20,14 +21,13 @@ export default function withUserProtectedRoute<
   T extends IWithUserProtectedRoute,
 >(WruseredComponent: ComponentType<T>) {
   return (props: Omit<T, keyof IWithUserProtectedRoute>) => {
-    const test = useRef(0);
+    const t = useTranslate();
     const dispatch = useTypedDispatch();
     const user: IInitialUserState = useTypedSelector((state) => state.user);
     const localUser: string | null = localStorage.getItem("username");
 
     useEffect(() => {
       fetchUser();
-      test.current++;
     }, []);
 
     async function fetchUser() {
@@ -35,13 +35,13 @@ export default function withUserProtectedRoute<
 
       if (localUser) {
         dispatch(userActions.setUserStatus("loading"));
-        dispatch(userActions.setUserMessage("Загрузка..."));
+        dispatch(userActions.setUserMessage(t("Загрузка...")));
 
         const fetchedUser: IUser | undefined =
           await api.getUserByUserName(localUser);
 
         if (fetchedUser) {
-          dispatch(userActions.setUserMessage("Успешная авторизация!"));
+          dispatch(userActions.setUserMessage(t("Успешная авторизация!")));
           dispatch(userActions.setUserStatus("success"));
           dispatch(userActions.setUser(fetchedUser));
         }
@@ -68,7 +68,6 @@ export default function withUserProtectedRoute<
 
       return <>Произошла непредвиденная ошибка</>;
     }
-    console.log(test);
     return <>{renderContent()}</>;
   };
 }

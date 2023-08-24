@@ -8,7 +8,7 @@ import userAsyncActions from "../../store/user/user-async-actions";
 import {
   useTypedDispatch,
   useTypedSelector,
-} from "../../hooks/useTypedSelector.";
+} from "../../hooks/useTypedSelector";
 import { IUser } from "../../types/app";
 import { routeNames } from "../../route/routes";
 
