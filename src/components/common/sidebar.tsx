@@ -42,7 +42,7 @@ export default function Sidebar() {
       getItem(t("Мои боты"), routeNames.DASHBOARD, <DesktopOutlined />),
       getItem(t("Выйти"), "EXIT", <LogoutOutlined />),
     ];
-  }, []);
+  }, [t]);
 
   const location = useLocation();
   const navigate = useNavigate();

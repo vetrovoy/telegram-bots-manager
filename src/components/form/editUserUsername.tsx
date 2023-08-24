@@ -29,7 +29,7 @@ export default function EditUserUsername({ username }: Props) {
         <Form.Item
           initialValue={username}
           name="username"
-          rules={[rules.required("Введите имя пользователя!")]}
+          rules={[rules.required(t("Введите имя пользователя!"))]}
         >
           <Input />
         </Form.Item>

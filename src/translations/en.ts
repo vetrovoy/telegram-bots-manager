@@ -5,6 +5,9 @@ export const en = {
   Вход: "Login",
   Имя: "Username",
   Пароль: "Password",
+  "Подтвердите старый пароль!": "Confirm the old password!",
+  "Новый пароль": "New password",
+  "Старый пароль": "Old password",
   "Личный кабинет": "Personal Account",
   "Управляйте своим аккаунтом из этой панели":
     "Manage your account from this panel",

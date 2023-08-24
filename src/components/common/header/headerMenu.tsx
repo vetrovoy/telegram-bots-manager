@@ -27,7 +27,7 @@ export default function HeaderMenu() {
         label: t(`Выйти`),
       },
     ];
-  }, []);
+  }, [t]);
 
   const [isShowLogoutModal, setIsShowLogoutModal] = useState<boolean>(false);
 

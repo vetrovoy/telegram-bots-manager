@@ -32,7 +32,7 @@ export default function UserInformation({ username }: Props) {
         span: 4,
       },
     ];
-  }, []);
+  }, [t]);
 
   return <Descriptions bordered items={items} />;
 }

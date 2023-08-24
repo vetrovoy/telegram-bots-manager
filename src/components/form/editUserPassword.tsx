@@ -29,7 +29,7 @@ export default function EditUserPassword({ user }: IEditUserPassword) {
 
         <Form.Item
           name="password"
-          rules={[rules.required("Подтвердите старый пароль!")]}
+          rules={[rules.required(t("Подтвердите старый пароль!"))]}
         >
           <Input.Password placeholder={t("Старый пароль")} />
         </Form.Item>
@@ -38,7 +38,7 @@ export default function EditUserPassword({ user }: IEditUserPassword) {
           name="password-new"
           rules={[rules.required(t("Введите новый пароль!"))]}
         >
-          <Input.Password placeholder="Новый пароль" />
+          <Input.Password placeholder={t("Новый пароль")} />
         </Form.Item>
 
         <Form.Item>
