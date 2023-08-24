@@ -5,15 +5,13 @@ import { translate } from "../utils/translate";
 import { useTypedSelector } from "./useTypedSelector";
 
 export const useTranslate = () => {
-  const user = useTypedSelector((state) => state.user.user);
+  const lang = useTypedSelector((state) => state.user.user?.language);
 
   const t = useCallback(
     (sting: string): string => {
-      return user?.language
-        ? translate(sting, user.language)
-        : translate(sting);
+      return lang ? translate(sting, lang) : translate(sting);
     },
-    [user?.language],
+    [lang],
   );
 
   return t;
