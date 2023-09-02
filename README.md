@@ -1,5 +1,3 @@
-# В проекте
-
 react / typescript / react-router-dom / redux-toolkit / ant-design / mock api
 
 вход:
