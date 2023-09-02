@@ -11,6 +11,8 @@ import { IBot } from "../../types/app";
 import { botsActions } from "../../store/bots/bots";
 import { useTranslate } from "../../hooks/useTranslate";
 
+import style from "./style/addUserBotForm.module.css";
+
 type FieldType = {
   token?: string;
 };
@@ -56,10 +58,7 @@ export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
       onFinish={onFinishHandler}
       autoComplete="off"
     >
-      <Typography.Text
-        type="secondary"
-        style={{ display: "inline-block", marginBottom: 20 }}
-      >
+      <Typography.Text type="secondary" className={style.text}>
         {t("Токен - официальный адрес бота в Telegram")}
       </Typography.Text>
 
@@ -90,7 +89,7 @@ export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
           loading={bots.status === "loading"}
           type="primary"
           htmlType="submit"
-          style={{ marginTop: "20px" }}
+          className={style.button}
         >
           {t("Принять")}
         </Button>

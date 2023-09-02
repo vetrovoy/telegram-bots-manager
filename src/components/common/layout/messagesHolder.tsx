@@ -2,8 +2,8 @@ import { useEffect } from "react";
 
 import { message } from "antd";
 
-import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { useTranslate } from "../../hooks/useTranslate";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 export default function MessagesHolder() {
   const t = useTranslate();

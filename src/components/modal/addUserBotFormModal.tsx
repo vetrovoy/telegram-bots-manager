@@ -6,12 +6,12 @@ import { useTranslate } from "../../hooks/useTranslate";
 
 interface IAddUserBotFormModal {
   title: string;
-  style?: React.CSSProperties;
+  className?: string;
 }
 
 export default function AddUserBotFormModal({
   title,
-  style,
+  className,
 }: IAddUserBotFormModal) {
   const t = useTranslate();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -30,7 +30,7 @@ export default function AddUserBotFormModal({
 
   return (
     <>
-      <Button type="primary" onClick={showModal} style={style}>
+      <Button type="primary" onClick={showModal} className={className}>
         {title}
       </Button>
       <Modal

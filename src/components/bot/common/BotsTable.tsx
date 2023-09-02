@@ -4,10 +4,12 @@ import { Badge, Popover, Space, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { MoreOutlined } from "@ant-design/icons";
 
-import { IBot } from "../../types/app";
-import { useTranslate } from "../../hooks/useTranslate";
+import { IBot } from "../../../types/app";
+import { useTranslate } from "../../../hooks/useTranslate";
 
-import BotPopoverSettings from "./botPopoverSettings";
+import BotPopoverSettings from "../settings/botPopoverSettings";
+
+import style from "./style/botsTable.module.css";
 
 type Props = {
   loading?: boolean;
@@ -65,7 +67,7 @@ export default function BotsTable({ bots, loading }: Props) {
                 placement="bottom"
                 content={<BotPopoverSettings bot={record} />}
               >
-                <MoreOutlined style={{ fontSize: 24, rotate: "90deg" }} />
+                <MoreOutlined className={style.iconMore} />
               </Popover>
             </Space>
           );

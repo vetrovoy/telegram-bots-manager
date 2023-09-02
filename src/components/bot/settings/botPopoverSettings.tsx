@@ -9,14 +9,14 @@ import {
 
 import { useNavigate } from "react-router-dom";
 
-import { routeNames } from "../../route/routes";
-import { IBot } from "../../types/app";
+import { routeNames } from "../../../route/routes";
+import { IBot } from "../../../types/app";
 import {
   useTypedDispatch,
   useTypedSelector,
-} from "../../hooks/useTypedSelector";
-import { botsActions } from "../../store/bots/bots";
-import { useTranslate } from "../../hooks/useTranslate";
+} from "../../../hooks/useTypedSelector";
+import { botsActions } from "../../../store/bots/bots";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 type Props = {
   bot: IBot;

@@ -14,6 +14,8 @@ import RemoveUserModal from "../components/modal/removeUserModal";
 import withUserProtectedRoute from "../components/route/withUserProtectedRoute";
 import { useTranslate } from "../hooks/useTranslate";
 
+import style from "./style/account.tsx.module.css";
+
 interface IAccount {
   user: IUser;
 }
@@ -34,7 +36,7 @@ export default withUserProtectedRoute(function Account({ user }: IAccount) {
         subtitle={t("Управляйте своим аккаунтом из этой панели")}
       >
         <Row gutter={16}>
-          <Col span={12} style={{ marginBottom: 16 }}>
+          <Col span={12} className={style.col}>
             <Card
               title={t("Основные сведения профиля")}
               bordered={false}

@@ -11,7 +11,7 @@ import { IInitialUserState, userActions } from "../../store/user/user";
 import { IUser } from "../../types/app";
 import { routeNames } from "../../route/routes";
 import { useTranslate } from "../../hooks/useTranslate";
-import AppSpin from "../common/appSpin";
+import AppSpin from "../common/layout/appSpin";
 
 interface IWithUserProtectedRoute {
   user: IUser | null;

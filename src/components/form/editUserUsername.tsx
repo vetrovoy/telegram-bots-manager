@@ -5,6 +5,8 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useTranslate } from "../../hooks/useTranslate";
 import { IUser } from "../../types/app";
 
+import style from "./style/editUserUsername.module.css";
+
 type Props = {
   username: IUser["username"];
 };
@@ -18,10 +20,7 @@ export default function EditUserUsername({ username }: Props) {
   return (
     <>
       <Form name="login" layout="vertical" onFinish={onFinish}>
-        <Typography.Text
-          type="secondary"
-          style={{ display: "inline-block", marginBottom: 16 }}
-        >
+        <Typography.Text type="secondary" className={style.text}>
           {t(
             "Вы можете задать логин, чтобы в дальнейшем использовать его для входа на сайт либо для передачи доступа.",
           )}
@@ -40,7 +39,7 @@ export default function EditUserUsername({ username }: Props) {
             loading={user.status === "loading"}
             type="primary"
             htmlType="submit"
-            style={{ marginTop: "20px" }}
+            className={style.button}
           >
             {t("Сохранить")}
           </Button>

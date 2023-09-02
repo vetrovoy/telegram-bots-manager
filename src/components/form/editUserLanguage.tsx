@@ -5,6 +5,8 @@ import { useTypedDispatch } from "../../hooks/useTypedSelector";
 import { userActions } from "../../store/user/user";
 import { IUser } from "../../types/app";
 
+import style from "./style/editUserLanguage.module.css";
+
 type Props = { user: IUser };
 
 export default function EditUserLanguage({ user }: Props) {
@@ -18,16 +20,13 @@ export default function EditUserLanguage({ user }: Props) {
 
   return (
     <>
-      <Typography.Text
-        type="secondary"
-        style={{ display: "inline-block", marginBottom: 16 }}
-      >
+      <Typography.Text type="secondary" className={style.text}>
         {t("Выберите язык приложения")}
       </Typography.Text>
 
       <Select
         defaultValue={user?.language}
-        style={{ width: 190, display: "block" }}
+        className={style.select}
         onChange={handleChange}
         options={[
           { value: "ru", label: t("Русский") },

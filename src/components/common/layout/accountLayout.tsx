@@ -2,10 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Layout, Breadcrumb } from "antd";
 
-import Sidebar from "../sidebar";
 import Header from "../header/header";
 
 import { useTranslate } from "../../../hooks/useTranslate";
+
+import Sidebar from "./sidebar";
+
+import style from "./style/accountLayout.module.css";
 
 export type Breadcrumbs = {
   path: string;
@@ -33,9 +36,9 @@ export default function AccountLayout({
       <Layout>
         <Header title={title} subtitle={subtitle} />
 
-        <Layout style={{ margin: "16px 34px" }}>
+        <Layout className={style.layout}>
           {breadcrumbs && (
-            <Breadcrumb style={{ marginBottom: "34px" }}>
+            <Breadcrumb className={style.breadcrumb}>
               {breadcrumbs.map(({ title, path }) => {
                 return (
                   <Breadcrumb.Item key={path}>
