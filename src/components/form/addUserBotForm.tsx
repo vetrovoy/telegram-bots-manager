@@ -17,11 +17,11 @@ type FieldType = {
   token?: string;
 };
 
-interface IAddUserBotForm {
+type AddUserBotFormProps = {
   onFinish: () => void;
-}
+};
 
-export default function AddUserBotForm({ onFinish }: IAddUserBotForm) {
+export default function AddUserBotForm({ onFinish }: AddUserBotFormProps) {
   const t = useTranslate();
 
   const dispatch = useTypedDispatch();

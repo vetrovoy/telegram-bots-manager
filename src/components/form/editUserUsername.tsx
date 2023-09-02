@@ -7,11 +7,11 @@ import { IUser } from "../../types/app";
 
 import style from "./style/editUserUsername.module.css";
 
-type Props = {
+type EditUserUsernameProps = {
   username: IUser["username"];
 };
 
-export default function EditUserUsername({ username }: Props) {
+export default function EditUserUsername({ username }: EditUserUsernameProps) {
   const t = useTranslate();
   const user = useTypedSelector((state) => state.user);
 

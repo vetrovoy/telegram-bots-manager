@@ -11,7 +11,7 @@ import BotPopoverSettings from "../settings/botPopoverSettings";
 
 import style from "./style/botsTable.module.css";
 
-type Props = {
+type BotsTableProps = {
   loading?: boolean;
   bots: IBot[];
 };
@@ -20,7 +20,7 @@ interface DataType extends IBot {
   key: string;
 }
 
-export default function BotsTable({ bots, loading }: Props) {
+export default function BotsTable({ bots, loading }: BotsTableProps) {
   const t = useTranslate();
 
   const columns: ColumnsType<IBot> = useMemo(() => {

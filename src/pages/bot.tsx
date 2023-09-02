@@ -14,11 +14,11 @@ import { useFetchBot } from "../hooks/useFetchBot";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import BotConstructor from "../components/bot/constructor/botConstructor";
 
-type Props = {
+type BotProps = {
   user: IUser;
 };
 
-export default withUserProtectedRoute(function Bot({ user }: Props) {
+export default withUserProtectedRoute(function Bot({ user }: BotProps) {
   const location = useLocation();
   const { slug } = useParams();
   const bots = useTypedSelector((state) => state.bots);

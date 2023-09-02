@@ -4,7 +4,7 @@ import { useTypedDispatch } from "../../hooks/useTypedSelector";
 import userAsyncActions from "../../store/user/user-async-actions";
 import { useTranslate } from "../../hooks/useTranslate";
 
-type Props = {
+type LogoutUserModalProps = {
   visible: boolean;
   handleOk: () => any;
   onCancel: () => any;
@@ -14,7 +14,7 @@ export default function LogoutUserModal({
   visible,
   handleOk,
   onCancel,
-}: Props) {
+}: LogoutUserModalProps) {
   const t = useTranslate();
 
   const dispatch = useTypedDispatch();

@@ -5,11 +5,11 @@ import { IBot, TConstructor, TConstructorButton } from "../../../types/app";
 import BotConstructorButtonsForm from "./botConstructorButtonsForm";
 import BotConstructorMessageForm from "./botConstructorMessageForm";
 
-type Props = {
+type BotConstructorProps = {
   bot: IBot;
 };
 
-export default function BotConstructor({ bot }: Props) {
+export default function BotConstructor({ bot }: BotConstructorProps) {
   const [constructorForm, setConstructorForm] = useState<TConstructor>({
     message: bot.constructor?.message ? bot.constructor?.message : "",
     buttons: bot.constructor?.buttons ? bot.constructor?.buttons : [],

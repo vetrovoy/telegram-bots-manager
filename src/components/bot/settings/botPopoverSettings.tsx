@@ -18,11 +18,11 @@ import {
 import { botsActions } from "../../../store/bots/bots";
 import { useTranslate } from "../../../hooks/useTranslate";
 
-type Props = {
+type BotPopoverSettingsProps = {
   bot: IBot;
 };
 
-export default function BotPopoverSettings({ bot }: Props) {
+export default function BotPopoverSettings({ bot }: BotPopoverSettingsProps) {
   const t = useTranslate();
   const bots = useTypedSelector((state) => state.bots.bots);
   const dispatch = useTypedDispatch();

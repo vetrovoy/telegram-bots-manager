@@ -4,15 +4,15 @@ import { Button, Modal } from "antd";
 import AddBotForm from "../form/addUserBotForm";
 import { useTranslate } from "../../hooks/useTranslate";
 
-interface IAddUserBotFormModal {
+type AddUserBotFormModalProps = {
   title: string;
   className?: string;
-}
+};
 
 export default function AddUserBotFormModal({
   title,
   className,
-}: IAddUserBotFormModal) {
+}: AddUserBotFormModalProps) {
   const t = useTranslate();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 

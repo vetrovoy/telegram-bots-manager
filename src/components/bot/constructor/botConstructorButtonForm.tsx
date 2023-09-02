@@ -11,7 +11,7 @@ import { TConstructorButton } from "../../../types/app";
 
 import style from "./style/botConstructorButtonForm.module.css";
 
-type Props = {
+type BotConstructorButtonFormProps = {
   buttons: TConstructorButton[];
   button: TConstructorButton;
   setButtonResponse: (buttons: TConstructorButton[]) => void;
@@ -21,7 +21,7 @@ export default function BotConstructorButtonForm({
   buttons,
   button,
   setButtonResponse,
-}: Props) {
+}: BotConstructorButtonFormProps) {
   const t = useTranslate();
   const [response, setResponse] = useState<string>(
     button?.response ? button?.response : "",

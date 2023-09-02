@@ -13,11 +13,13 @@ import { useTranslate } from "../hooks/useTranslate";
 
 import style from "./style/dashboard.module.css";
 
-interface IDashboard {
+type DashboardProps = {
   user: IUser;
-}
+};
 
-export default withUserProtectedRoute(function Dashboard({ user }: IDashboard) {
+export default withUserProtectedRoute(function Dashboard({
+  user,
+}: DashboardProps) {
   const t = useTranslate();
 
   const breadcrumbs: Breadcrumbs[] = [
