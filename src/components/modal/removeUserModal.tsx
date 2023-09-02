@@ -4,9 +4,10 @@ import { useState } from "react";
 import { useTypedDispatch } from "../../hooks/useTypedSelector";
 import userAsyncActions from "../../store/user/user-async-actions";
 import { useTranslate } from "../../hooks/useTranslate";
+import { IUser } from "../../types/app";
 
 type Props = {
-  username: string;
+  username: IUser["username"];
 };
 
 export default function RemoveUserModal({ username }: Props) {
