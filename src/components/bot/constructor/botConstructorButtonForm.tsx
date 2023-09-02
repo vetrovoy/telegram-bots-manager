@@ -35,22 +35,24 @@ export default function BotConstructorButtonForm({
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   const onFinish = (v: { response: string }) => {
     setResponse(v.response);
 
-    const newButton: TConstructorButton | undefined = buttons.find(
-      (b) => b.id === button.id,
-    );
-    const newButtonsFiltered: TConstructorButton[] = buttons.filter(
-      (b) => b.id !== button.id,
-    );
+    // Находим индекс элемента button в массиве buttons
+    const newButtonIndex = buttons.findIndex((b) => b.id === button.id);
+    if (newButtonIndex !== -1) {
+      const newButton: TConstructorButton = {
+        ...buttons[newButtonIndex],
+        response: v.response,
+      };
 
-    if (newButton) {
-      newButton.response = v.response;
-
+      // Создаем новый массив newButtons, копируя элементы до индекса newButtonIndex,
+      // добавляя newButton и копируя оставшиеся элементы после индекса newButtonIndex
       const newButtons: TConstructorButton[] = [
-        ...newButtonsFiltered,
+        ...buttons.slice(0, newButtonIndex),
         newButton,
+        ...buttons.slice(newButtonIndex + 1),
       ];
 
       setButtonResponse(newButtons);
