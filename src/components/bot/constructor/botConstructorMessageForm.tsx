@@ -6,7 +6,7 @@ import { TConstructor } from "../../../types/app";
 import { useTranslate } from "../../../hooks/useTranslate";
 import { rules } from "../../../utils/rules";
 
-type Props = {
+type BotConstructorMessageFormProps = {
   initialMessage: TConstructor["message"];
   onSave: (message: string) => void;
 };
@@ -14,7 +14,7 @@ type Props = {
 export default function BotConstructorMessageForm({
   initialMessage,
   onSave,
-}: Props) {
+}: BotConstructorMessageFormProps) {
   const t = useTranslate();
 
   const onFinish = (v: { message: string }) => {

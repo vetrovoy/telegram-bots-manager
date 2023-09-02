@@ -15,11 +15,11 @@ import { useTranslate } from "../../hooks/useTranslate";
 
 import style from "./style/userBots.module.css";
 
-type Props = {
+type UserBotsProps = {
   user: IUser;
 };
 
-export default function UserBots({ user }: Props) {
+export default function UserBots({ user }: UserBotsProps) {
   const t = useTranslate();
   const dispatch = useTypedDispatch();
   const bots = useTypedSelector((state) => state.bots);

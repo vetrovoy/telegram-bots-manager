@@ -6,11 +6,11 @@ import { useTranslate } from "../../hooks/useTranslate";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { IUser } from "../../types/app";
 
-type Props = {
+type UserBotsProps = {
   username: IUser["username"];
 };
 
-export default function UserInformation({ username }: Props) {
+export default function UserInformation({ username }: UserBotsProps) {
   const bots = useTypedSelector((state) => state.bots.bots);
   const t = useTranslate();
 

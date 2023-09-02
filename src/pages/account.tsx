@@ -16,11 +16,11 @@ import { useTranslate } from "../hooks/useTranslate";
 
 import style from "./style/account.tsx.module.css";
 
-interface IAccount {
+type AccountProps = {
   user: IUser;
-}
+};
 
-export default withUserProtectedRoute(function Account({ user }: IAccount) {
+export default withUserProtectedRoute(function Account({ user }: AccountProps) {
   const t = useTranslate();
 
   const breadcrumbs: Breadcrumbs[] = [

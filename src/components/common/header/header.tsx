@@ -4,12 +4,12 @@ import HeaderMenu from "./headerMenu";
 
 import style from "./style/header.module.css";
 
-interface IHeader {
+type HeaderProps = {
   title: string;
   subtitle: string;
-}
+};
 
-export default function Header({ title, subtitle }: IHeader) {
+export default function Header({ title, subtitle }: HeaderProps) {
   return (
     <Layout.Header className={style.wrapper}>
       <div className={style.container}>

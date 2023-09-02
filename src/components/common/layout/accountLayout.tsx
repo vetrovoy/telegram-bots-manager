@@ -15,19 +15,19 @@ export type Breadcrumbs = {
   title: string;
 };
 
-interface IAccountLayout {
+type AccountLayoutProps = {
   title: string;
   subtitle: string;
   breadcrumbs?: Breadcrumbs[];
   children?: React.ReactNode;
-}
+};
 
 export default function AccountLayout({
   children,
   title,
   subtitle,
   breadcrumbs,
-}: IAccountLayout) {
+}: AccountLayoutProps) {
   const t = useTranslate();
   return (
     <Layout>

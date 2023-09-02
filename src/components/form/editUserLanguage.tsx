@@ -7,9 +7,9 @@ import { IUser } from "../../types/app";
 
 import style from "./style/editUserLanguage.module.css";
 
-type Props = { user: IUser };
+type EditUserLanguageProps = { user: IUser };
 
-export default function EditUserLanguage({ user }: Props) {
+export default function EditUserLanguage({ user }: EditUserLanguageProps) {
   const dispatch = useTypedDispatch();
   const t = useTranslate();
 

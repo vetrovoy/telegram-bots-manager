@@ -6,11 +6,11 @@ import userAsyncActions from "../../store/user/user-async-actions";
 import { useTranslate } from "../../hooks/useTranslate";
 import { IUser } from "../../types/app";
 
-type Props = {
+type RemoveUserModalProps = {
   username: IUser["username"];
 };
 
-export default function RemoveUserModal({ username }: Props) {
+export default function RemoveUserModal({ username }: RemoveUserModalProps) {
   const t = useTranslate();
   const dispatch = useTypedDispatch();
 

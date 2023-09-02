@@ -7,11 +7,11 @@ import { useTranslate } from "../../hooks/useTranslate";
 
 import style from "./style/editUserPassword.module.css";
 
-interface IEditUserPassword {
+type EditUserPasswordProps = {
   user: IUser;
-}
+};
 
-export default function EditUserPassword({ user }: IEditUserPassword) {
+export default function EditUserPassword({ user }: EditUserPasswordProps) {
   const t = useTranslate();
   const userStatus = useTypedSelector((state) => state.user.status);
 
