@@ -1,17 +1,19 @@
 import { useEffect } from "react";
 
-import { Skeleton, Typography } from "antd";
+import { Typography } from "antd";
 
 import AddUserBotFormModal from "../modal/addUserBotFormModal";
 
 import { IUser } from "../../types/app";
-import BotsTable from "../bot/BotsTable";
+import BotsTable from "../bot/common/BotsTable";
 import {
   useTypedDispatch,
   useTypedSelector,
 } from "../../hooks/useTypedSelector";
 import botsAsyncActions from "../../store/bots/bots-async-actions";
 import { useTranslate } from "../../hooks/useTranslate";
+
+import style from "./style/userBots.module.css";
 
 type Props = {
   user: IUser;
@@ -40,7 +42,7 @@ export default function UserBots({ user }: Props) {
           </Typography.Text>
 
           <AddUserBotFormModal
-            style={{ display: "block", marginTop: 30 }}
+            className={style.form}
             title={t("Создать бота")}
           />
         </>

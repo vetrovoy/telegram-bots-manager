@@ -8,16 +8,11 @@ import { rules } from "../../../utils/rules";
 
 import BotConstructorButtonForm from "./botConstructorButtonForm";
 
+import style from "./style/botConstructorButtonsForm.module.css";
+
 type TBotConstructorButtonsFormProps = {
   initialButtons: TConstructorButton[];
   onSave: (buttons: TConstructorButton[]) => void;
-};
-
-const buttonsContainerStyles = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: 18,
-  marginBottom: 32,
 };
 
 export default function BotConstructorButtonsForm({
@@ -44,7 +39,7 @@ export default function BotConstructorButtonsForm({
     <>
       <Typography.Title level={5}>{t("Меню")}</Typography.Title>
 
-      <Row style={{ marginBottom: 30 }}>
+      <Row className={style.row}>
         {buttons &&
           buttons.map((b: TConstructorButton) => {
             return (
@@ -65,7 +60,7 @@ export default function BotConstructorButtonsForm({
         name="constructor_form_buttons"
         onFinish={onFinish}
         autoComplete="off"
-        style={buttonsContainerStyles}
+        className={style.container}
       >
         <Form.Item
           name={"name"}

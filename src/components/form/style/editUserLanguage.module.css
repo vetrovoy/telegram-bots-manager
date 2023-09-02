@@ -1,0 +1,9 @@
+.text {
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.select {
+  display: block;
+  width: 190px;
+}

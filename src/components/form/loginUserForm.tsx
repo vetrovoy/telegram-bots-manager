@@ -12,6 +12,8 @@ import {
 import { IUser } from "../../types/app";
 import { routeNames } from "../../route/routes";
 
+import style from "./style/loginUserForm.module.css";
+
 type FieldType = {
   username?: string;
   password?: string;
@@ -56,7 +58,7 @@ export default function LoginUserForm() {
             loading={user.status === "loading"}
             type="primary"
             htmlType="submit"
-            style={{ marginTop: "20px" }}
+            className={style.button}
           >
             Принять
           </Button>

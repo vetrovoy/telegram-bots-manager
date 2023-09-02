@@ -8,7 +8,7 @@ import AccountLayout, {
 
 import { routeNames } from "../route/routes";
 
-import AppSpin from "../components/common/appSpin";
+import AppSpin from "../components/common/layout/appSpin";
 import { useTranslate } from "../hooks/useTranslate";
 import { useFetchBot } from "../hooks/useFetchBot";
 import { useTypedSelector } from "../hooks/useTypedSelector";

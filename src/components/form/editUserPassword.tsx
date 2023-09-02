@@ -5,6 +5,8 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { rules } from "../../utils/rules";
 import { useTranslate } from "../../hooks/useTranslate";
 
+import style from "./style/editUserPassword.module.css";
+
 interface IEditUserPassword {
   user: IUser;
 }
@@ -18,10 +20,7 @@ export default function EditUserPassword({ user }: IEditUserPassword) {
   return (
     <>
       <Form name="login" layout="vertical" onFinish={onFinish}>
-        <Typography.Text
-          type="secondary"
-          style={{ display: "inline-block", marginBottom: 16 }}
-        >
+        <Typography.Text type="secondary" className={style.text}>
           {t(
             "Мы просим ввести старый (текущий) пароль в целях безопасности вашего профиля",
           )}
@@ -46,7 +45,7 @@ export default function EditUserPassword({ user }: IEditUserPassword) {
             loading={userStatus === "loading"}
             type="primary"
             htmlType="submit"
-            style={{ marginTop: "20px" }}
+            className={style.button}
           >
             {t("Сохранить")}
           </Button>

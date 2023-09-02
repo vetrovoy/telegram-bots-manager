@@ -9,9 +9,9 @@ import { Layout, Menu } from "antd";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
-import { routeNames } from "../../route/routes";
-import LogoutUserModal from "../modal/logoutUserModal";
-import { useTranslate } from "../../hooks/useTranslate";
+import { routeNames } from "../../../route/routes";
+import LogoutUserModal from "../../modal/logoutUserModal";
+import { useTranslate } from "../../../hooks/useTranslate";
 
 const { Sider } = Layout;
 

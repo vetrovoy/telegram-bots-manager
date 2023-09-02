@@ -11,6 +11,8 @@ import UserBots from "../components/user/userBots";
 import withUserProtectedRoute from "../components/route/withUserProtectedRoute";
 import { useTranslate } from "../hooks/useTranslate";
 
+import style from "./style/dashboard.module.css";
+
 interface IDashboard {
   user: IUser;
 }
@@ -40,7 +42,7 @@ export default withUserProtectedRoute(function Dashboard({ user }: IDashboard) {
             <Typography.Link>{t("Подробнее")}</Typography.Link>
           </Tooltip>
         }
-        style={{ width: "100%" }}
+        className={style.topCard}
       >
         <UserBots user={user} />
       </Card>
@@ -52,7 +54,7 @@ export default withUserProtectedRoute(function Dashboard({ user }: IDashboard) {
             <Typography.Link>{t("Подробнее")}</Typography.Link>
           </Tooltip>
         }
-        style={{ width: "100%", marginTop: "34px" }}
+        className={style.botCard}
       >
         <Typography.Text type="secondary">
           {t("Вам не предоставлен доступ ни к одному боту")}

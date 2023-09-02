@@ -9,6 +9,8 @@ import { rules } from "../../../utils/rules";
 
 import { TConstructorButton } from "../../../types/app";
 
+import style from "./style/botConstructorButtonForm.module.css";
+
 type Props = {
   buttons: TConstructorButton[];
   button: TConstructorButton;
@@ -61,7 +63,7 @@ export default function BotConstructorButtonForm({
     <>
       <Tooltip title={response}>
         <Button
-          style={{ width: "100%" }}
+          className={style.button}
           type="dashed"
           onClick={() => setIsModalOpen(true)}
         >

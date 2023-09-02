@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.userForm {
+  display: block;
+  height: 64px;
+  border-radius: 0;
+}

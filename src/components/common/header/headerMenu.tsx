@@ -8,6 +8,8 @@ import LogoutUserModal from "../../modal/logoutUserModal";
 import { routeNames } from "../../../route/routes";
 import { useTranslate } from "../../../hooks/useTranslate";
 
+import style from "./style/headerMenu.module.css";
+
 export default function HeaderMenu() {
   const t = useTranslate();
   const location = useLocation();
@@ -42,15 +44,9 @@ export default function HeaderMenu() {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "row",
-        }}
-      >
+      <div className={style.container}>
         <AddUserBotFormModal
-          style={{ display: "block", height: "64px", borderRadius: 0 }}
+          className={style.userForm}
           title={t("Создать бота")}
         />
         <Menu
