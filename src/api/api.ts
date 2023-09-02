@@ -1,94 +1,63 @@
-import axios, { AxiosResponse } from "axios";
+import { IBot, IUser } from "../types/app";
 
-import { IUser, IBot } from "../types/app";
+import { UserRepository } from "./repository/userRepository";
+import { BotRepository } from "./repository/botRepository";
 
-const API_ROOT = "http://localhost:3000/";
+export class ApiService {
+  private userRepository: UserRepository;
+  private botRepository: BotRepository;
 
-export class Api {
+  constructor() {
+    this.userRepository = new UserRepository();
+    this.botRepository = new BotRepository();
+  }
+
+  // Метод для создания пользователя
+  public createUser(user: IUser): void {
+    this.userRepository.createUser(user);
+  }
+
+  // Метод для удаления пользователя по ID
+  public deleteUser(userId: number): void {
+    this.userRepository.deleteUser(userId);
+  }
+
+  // Метод для получения пользователя по ID
   public async getUsers(): Promise<IUser[]> {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      const response: AxiosResponse<IUser[]> = await axios.get<IUser[]>(
-        API_ROOT + `/data/users.json`,
-      );
-      return response.data;
-    } catch (error: any) {
-      throw new Error(`Error while fetching users: ${error.message}`);
-    }
+    return await this.userRepository.getUsers();
   }
-  public async getUserByUserName(
-    username: IUser["username"],
-  ): Promise<IUser | undefined> {
-    const response = await this.getUsers();
 
-    const result: IUser | undefined = response.find(
-      (v) => v.username === username,
-    );
-
-    return result;
+  // Метод для получения пользователя по ID
+  public async getUserById(userId: number): Promise<IUser | undefined> {
+    return await this.userRepository.getUserById(userId);
   }
-  public async getUserBotsByUserName(
-    username: IUser["username"],
-  ): Promise<IBot[]> {
-    const response = await this.getBots();
-    const result: IBot[] | undefined = response.filter(
-      (v) => v.username === username,
-    );
 
-    return result ? result : [];
+  // Метод для получения пользователя по USERNAME
+  public async getUserByName(username: string): Promise<IUser | undefined> {
+    return await this.userRepository.getUserByName(username);
   }
-  public async getBots(): Promise<IBot[]> {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const response: AxiosResponse<IBot[]> = await axios.get<IBot[]>(
-        API_ROOT + `/data/bots.json`,
-      );
-      return response.data;
-    } catch (error: any) {
-      throw new Error(`Error while fetching users: ${error.message}`);
-    }
+  // Метод для создания бота
+  public async createBot(token: string, username: string): Promise<IBot> {
+    return await this.botRepository.createBot(token, username);
   }
-  public async createBot(
-    token: string,
-    username: IUser["username"],
-  ): Promise<IBot> {
-    return new Promise((resolve) =>
-      setTimeout(async () => {
-        const bots = await this.getBots();
 
-        const isBotExist = bots.find((b) => b.token === token);
-
-        if (!isBotExist) {
-          const botId: number = this.generateBotId();
-          const bot: IBot = {
-            id: botId,
-            status: "processing",
-            token: token,
-            username: username,
-            bot_name: `${username}_${botId}bot`,
-            bot_username: `@${username}_${botId}bot`,
-            timestamp: new Date().getTime(),
-            constructor: undefined,
-          };
-          resolve(bot);
-        }
-      }, 1000),
-    );
+  // Метод для удаления бота по ID
+  public deleteBot(botId: number): void {
+    this.botRepository.deleteBot(botId);
   }
-  private generateBotId(): number {
-    const digits: string = "0123456789";
-    let id: number = 0;
 
-    for (let i: number = 0; i < 6; i++) {
-      const randomIndex: number = Math.floor(Math.random() * digits.length);
-      id += parseInt(digits[randomIndex]);
-    }
-
-    return id;
+  // Метод для получения бота по ID
+  public async getBotById(botId: number): Promise<IBot | undefined> {
+    return await this.botRepository.getBotById(botId);
   }
+
+  // Метод для получения ботов по USERNAME
+  public async getBotsByUserName(username: string): Promise<IBot[]> {
+    return await this.botRepository.getBotsByUserName(username);
+  }
+  // getBotsByUserName
 }
 
-const api = new Api();
+const api = new ApiService();
 export default api;

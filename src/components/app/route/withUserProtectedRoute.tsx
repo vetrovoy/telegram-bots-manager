@@ -38,7 +38,7 @@ export default function withUserProtectedRoute<
         dispatch(userActions.setUserMessage(t("Загрузка...")));
 
         const fetchedUser: IUser | undefined =
-          await api.getUserByUserName(localUser);
+          await api.getUserByName(localUser);
 
         if (fetchedUser) {
           dispatch(userActions.setUserMessage(t("Успешная авторизация!")));

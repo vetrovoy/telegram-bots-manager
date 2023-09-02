@@ -10,9 +10,7 @@ const botsAsyncActions = {
   getBots: createAsyncThunk<IInitialBotsState, IUser>(
     "bots/getBots",
     async (userData: IUser) => {
-      const userBots: IBot[] = await api.getUserBotsByUserName(
-        userData.username,
-      );
+      const userBots: IBot[] = await api.getBotsByUserName(userData.username);
 
       let result: IInitialBotsState = {
         status: "idle",

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Api } from "../api/api";
+import api from "../api/api";
 
 import { IBot, IUser } from "../types/app";
 
@@ -12,8 +12,6 @@ interface IUseFetchBot {
   status: "loading" | "success" | "error";
   bot: IBot | null;
 }
-
-const api = new Api();
 
 export const useFetchBot = (
   botUsername: string | undefined,
@@ -33,7 +31,7 @@ export const useFetchBot = (
         let currentBots = bots.bots;
 
         if (currentBots.length === 0) {
-          currentBots = await api.getUserBotsByUserName(username);
+          currentBots = await api.getBotsByUserName(username);
           dispatch(botsActions.setBots(currentBots));
         }
 
