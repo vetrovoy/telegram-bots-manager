@@ -6,7 +6,20 @@
     "username": "admin",
     "bot_name": "BotFather",
     "bot_username": "BotFather",
-    "timestamp": 1692693874337
+    "timestamp": 1692693874337,
+    "constructor": {
+      "message": "/start",
+      "buttons": [
+        {
+          "name": "help",
+          "response": "help message"
+        },
+        {
+          "name": "hello",
+          "response": "hello message"
+        }
+      ]
+    }
   },
   {
     "id": 2,

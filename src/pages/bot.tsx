@@ -1,68 +1,29 @@
-import { useEffect, useState } from "react";
 import { Navigate, useLocation, useParams } from "react-router-dom";
 
-import { IBot, IUser } from "../types/app";
+import { IUser } from "../types/app";
 import withUserProtectedRoute from "../components/route/withUserProtectedRoute";
 import AccountLayout, {
   Breadcrumbs,
 } from "../components/common/layout/accountLayout";
 
-import { Api } from "../api/api";
 import { routeNames } from "../route/routes";
 
 import AppSpin from "../components/common/appSpin";
-import BotsTable from "../components/bot/BotsTable";
-import { useTypedDispatch, useTypedSelector } from "../hooks/useTypedSelector";
-import { botsActions } from "../store/bots/bots";
 import { useTranslate } from "../hooks/useTranslate";
+import { useFetchBot } from "../hooks/useFetchBot";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import BotConstructor from "../components/bot/constructor/botConstructor";
 
 type Props = {
   user: IUser;
 };
 
-const api = new Api();
-
 export default withUserProtectedRoute(function Bot({ user }: Props) {
   const location = useLocation();
   const { slug } = useParams();
-  const dispatch = useTypedDispatch();
-
-  const t = useTranslate();
   const bots = useTypedSelector((state) => state.bots);
-
-  const [status, setStatus] = useState<"loading" | "success" | "error">(
-    "loading",
-  );
-  const [bot, setBot] = useState<IBot | null>(null);
-
-  useEffect(() => {
-    async function fetchBot() {
-      setStatus("loading");
-
-      try {
-        let currentBots: IBot[];
-
-        if (bots.bots.length > 0) {
-          currentBots = bots.bots;
-        } else {
-          currentBots = await api.getUserBotsByUserName(user.username);
-          dispatch(botsActions.setBots(currentBots));
-        }
-
-        const selectedBot = currentBots.find((b) => b.bot_username === slug);
-
-        if (selectedBot) {
-          setBot(selectedBot);
-        }
-      } catch (error) {
-        setStatus("error");
-        console.log(error);
-      }
-
-      setStatus("success");
-    }
-    fetchBot();
-  }, [bots.bots, dispatch, slug, user.username]);
+  const { bot, status } = useFetchBot(slug, user.username);
+  const t = useTranslate();
 
   if (!slug) {
     return <Navigate to={routeNames.ERROR} />;
@@ -86,7 +47,9 @@ export default withUserProtectedRoute(function Bot({ user }: Props) {
           title={`${t("Общие настройки бота")} ${slug}`}
           subtitle={t("Настройте вашего бота и зарабатывайте больше")}
         >
-          <BotsTable loading={bots.status === "loading"} bots={[bot]} />
+          {/* <BotsTable loading={bots.status === "loading"} bots={[bot]} /> */}
+
+          <BotConstructor bot={bot} />
         </AccountLayout>
       );
     }

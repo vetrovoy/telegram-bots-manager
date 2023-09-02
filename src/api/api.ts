@@ -17,7 +17,9 @@ export class Api {
       throw new Error(`Error while fetching users: ${error.message}`);
     }
   }
-  public async getUserByUserName(username: string): Promise<IUser | undefined> {
+  public async getUserByUserName(
+    username: IUser["username"],
+  ): Promise<IUser | undefined> {
     const response = await this.getUsers();
 
     const result: IUser | undefined = response.find(
@@ -26,7 +28,9 @@ export class Api {
 
     return result;
   }
-  public async getUserBotsByUserName(username: string): Promise<IBot[]> {
+  public async getUserBotsByUserName(
+    username: IUser["username"],
+  ): Promise<IBot[]> {
     const response = await this.getBots();
     const result: IBot[] | undefined = response.filter(
       (v) => v.username === username,
@@ -46,7 +50,10 @@ export class Api {
       throw new Error(`Error while fetching users: ${error.message}`);
     }
   }
-  public async createBot(token: string, username: string): Promise<IBot> {
+  public async createBot(
+    token: string,
+    username: IUser["username"],
+  ): Promise<IBot> {
     return new Promise((resolve) =>
       setTimeout(async () => {
         const bots = await this.getBots();
@@ -63,6 +70,7 @@ export class Api {
             bot_name: `${username}_${botId}bot`,
             bot_username: `@${username}_${botId}bot`,
             timestamp: new Date().getTime(),
+            constructor: undefined,
           };
           resolve(bot);
         }

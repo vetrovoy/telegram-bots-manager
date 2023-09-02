@@ -4,9 +4,10 @@ import type { DescriptionsProps } from "antd";
 
 import { useTranslate } from "../../hooks/useTranslate";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { IUser } from "../../types/app";
 
 type Props = {
-  username: string;
+  username: IUser["username"];
 };
 
 export default function UserInformation({ username }: Props) {

@@ -80,4 +80,11 @@ export const en = {
   "Настройте вашего бота и зарабатывайте больше":
     "Set up your bot and earn more",
   "Общие настройки бота": "General bot settings",
+  "Стартовое сообщение": "Start message",
+  "Ваше сообщение": "Your's message",
+  "Добавить кнопку": "Add button",
+  Название: "Title",
+  "Введите сообщение!": "Enter your message!",
+  "Введите название!": "Enter button title!",
+  "Введите возвращаемое значение": "Enter return value",
 };

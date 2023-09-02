@@ -3,9 +3,10 @@ import { Button, Form, Input, Typography } from "antd";
 import { rules } from "../../utils/rules";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useTranslate } from "../../hooks/useTranslate";
+import { IUser } from "../../types/app";
 
 type Props = {
-  username: string;
+  username: IUser["username"];
 };
 
 export default function EditUserUsername({ username }: Props) {
