@@ -3,14 +3,14 @@ import { Route, Routes } from "react-router-dom";
 import { Layout } from "antd";
 
 import { routes } from "./route/routes";
-import MessagesHolder from "./components/common/layout/messagesHolder";
+import AppMessagesHolder from "./components/app/layout/appMessagesHolder";
 
 import style from "./app.module.css";
 
 export default function App() {
   return (
     <>
-      <MessagesHolder />
+      <AppMessagesHolder />
       <Layout className={style.layout}>
         <Routes>
           {routes.map((route) => (

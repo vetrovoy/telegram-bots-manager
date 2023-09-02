@@ -1,6 +1,6 @@
 import { Card, Layout } from "antd";
 
-import LoginUserForm from "../components/form/loginUserForm";
+import LoginUserForm from "../components/user/form/login/loginUserForm";
 
 import style from "./style/home.module.css";
 

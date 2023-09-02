@@ -1,14 +1,12 @@
 import { Card, Tooltip, Typography } from "antd";
 
-import AccountLayout, {
-  Breadcrumbs,
-} from "../components/common/layout/accountLayout";
+import AppLayout, { Breadcrumbs } from "../components/app/layout/appLayout";
 
 import { routeNames } from "../route/routes";
 import { IUser } from "../types/app";
 
-import UserBots from "../components/user/userBots";
-import withUserProtectedRoute from "../components/route/withUserProtectedRoute";
+import UserBotsList from "../components/user/common/userBotsList";
+import withUserProtectedRoute from "../components/app/route/withUserProtectedRoute";
 import { useTranslate } from "../hooks/useTranslate";
 
 import style from "./style/dashboard.module.css";
@@ -28,7 +26,7 @@ export default withUserProtectedRoute(function Dashboard({
   ];
 
   return (
-    <AccountLayout
+    <AppLayout
       breadcrumbs={breadcrumbs}
       title={t("Мои боты")}
       subtitle={t("Управляйте всеми ботами из этой панели")}
@@ -46,7 +44,7 @@ export default withUserProtectedRoute(function Dashboard({
         }
         className={style.topCard}
       >
-        <UserBots user={user} />
+        <UserBotsList user={user} />
       </Card>
 
       <Card
@@ -62,6 +60,6 @@ export default withUserProtectedRoute(function Dashboard({
           {t("Вам не предоставлен доступ ни к одному боту")}
         </Typography.Text>
       </Card>
-    </AccountLayout>
+    </AppLayout>
   );
 });

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { DeleteOutlined, SettingOutlined } from "@ant-design/icons";
 
 import TextArea from "antd/es/input/TextArea";
-import { Button, Form, Modal, Tooltip } from "antd";
+import { Button, Form, Modal, Row, Tooltip } from "antd";
 
 import { useTranslate } from "../../../hooks/useTranslate";
 
@@ -61,6 +62,16 @@ export default function BotConstructorButtonForm({
     setIsModalOpen(false);
   };
 
+  const removeButton: React.MouseEventHandler<HTMLButtonElement> =
+    useCallback(() => {
+      const newButtons: TConstructorButton[] = buttons.filter(
+        (b) => b.name !== button.name,
+      );
+
+      setButtonResponse(newButtons);
+      setIsModalOpen(false);
+    }, [buttons, setButtonResponse, button.name]);
+
   return (
     <>
       <Tooltip title={response}>
@@ -70,6 +81,8 @@ export default function BotConstructorButtonForm({
           onClick={() => setIsModalOpen(true)}
         >
           {button.name}
+
+          <SettingOutlined />
         </Button>
       </Tooltip>
 
@@ -98,11 +111,19 @@ export default function BotConstructorButtonForm({
             />
           </Form.Item>
 
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              {t("Принять")}
-            </Button>
-          </Form.Item>
+          <Row className={style.row}>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                {t("Принять")}
+              </Button>
+            </Form.Item>
+
+            <Form.Item>
+              <Button type="text" onClick={removeButton}>
+                <DeleteOutlined />
+              </Button>
+            </Form.Item>
+          </Row>
         </Form>
       </Modal>
     </>

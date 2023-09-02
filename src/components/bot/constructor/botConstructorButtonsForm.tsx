@@ -36,7 +36,7 @@ export default function BotConstructorButtonsForm({
   };
 
   return (
-    <>
+    <div className={style.wrapper}>
       <Typography.Title level={5}>{t("Меню")}</Typography.Title>
 
       <Row className={style.row}>
@@ -81,6 +81,6 @@ export default function BotConstructorButtonsForm({
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </div>
   );
 }

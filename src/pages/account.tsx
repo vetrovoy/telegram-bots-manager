@@ -1,17 +1,15 @@
 import { Card, Col, Row } from "antd";
 
-import AccountLayout, {
-  Breadcrumbs,
-} from "../components/common/layout/accountLayout";
+import AppLayout, { Breadcrumbs } from "../components/app/layout/appLayout";
 
 import { routeNames } from "../route/routes";
-import EditUserUsername from "../components/form/editUserUsername";
-import UserInformation from "../components/user/userInformation";
-import EditUserPassword from "../components/form/editUserPassword";
-import EditUserLanguage from "../components/form/editUserLanguage";
+import EditUserUsername from "../components/user/form/edit/editUserUsername";
+import UserInformation from "../components/user/common/userInformation";
+import EditUserPassword from "../components/user/form/edit/editUserPassword";
+import EditUserLanguage from "../components/user/form/edit/editUserLanguage";
 import { IUser } from "../types/app";
-import RemoveUserModal from "../components/modal/removeUserModal";
-import withUserProtectedRoute from "../components/route/withUserProtectedRoute";
+import DeleteUserModal from "../components/user/modal/delete/deleteUserModal";
+import withUserProtectedRoute from "../components/app/route/withUserProtectedRoute";
 import { useTranslate } from "../hooks/useTranslate";
 
 import style from "./style/account.tsx.module.css";
@@ -30,7 +28,7 @@ export default withUserProtectedRoute(function Account({ user }: AccountProps) {
 
   return (
     <>
-      <AccountLayout
+      <AppLayout
         breadcrumbs={breadcrumbs}
         title={t("Личный кабинет")}
         subtitle={t("Управляйте своим аккаунтом из этой панели")}
@@ -40,7 +38,7 @@ export default withUserProtectedRoute(function Account({ user }: AccountProps) {
             <Card
               title={t("Основные сведения профиля")}
               bordered={false}
-              extra={<RemoveUserModal username={user.username} />}
+              extra={<DeleteUserModal username={user.username} />}
             >
               <UserInformation username={user.username} />
             </Card>
@@ -61,7 +59,7 @@ export default withUserProtectedRoute(function Account({ user }: AccountProps) {
             </Card>
           </Col>
         </Row>
-      </AccountLayout>
+      </AppLayout>
     </>
   );
 });

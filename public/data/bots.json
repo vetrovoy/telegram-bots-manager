@@ -11,10 +11,12 @@
       "message": "/start",
       "buttons": [
         {
+          "id": 123134534523,
           "name": "help",
           "response": "help message"
         },
         {
+          "id": 1436464623123,
           "name": "hello",
           "response": "hello message"
         }

@@ -1,5 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 
+import { IBot } from "../../types/app";
+
 import { IInitialBotsState } from "./bots";
 
 const botsReducers = {
