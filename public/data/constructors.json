@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "name": "Сценарий 1",
+    "message": "Lorem ipsum dolor sit amet",
+    "buttons": [
+      {
+        "id": 1,
+        "name": "Button 1",
+        "response": {
+          "id": 1,
+          "message": "Lorem ipsum dolor sit amet",
+          "buttons_relation": [2, 3]
+        }
+      },
+      {
+        "id": 2,
+        "name": "Button 2"
+      },
+      {
+        "id": 3,
+        "name": "Button 3"
+      }
+    ],
+    "user_id": 2,
+    "bot_id": 1
+  },
+  {
+    "id": 2,
+    "name": "Сценарий 2",
+    "message": "Lorem ipsum dolor sit amet",
+    "buttons": [
+      {
+        "id": 1,
+        "name": "Button 1",
+        "response": {
+          "id": 1,
+          "message": "Lorem ipsum dolor sit amet",
+          "buttons_relation": [2, 3]
+        }
+      },
+      {
+        "id": 2,
+        "name": "Button 2"
+      },
+      {
+        "id": 3,
+        "name": "Button 3"
+      }
+    ],
+    "user_id": 2,
+    "bot_id": 2
+  }
+]

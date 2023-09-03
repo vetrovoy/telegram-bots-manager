@@ -33,7 +33,7 @@ export default function AddUserBotForm({ onFinish }: AddUserBotFormProps) {
     dispatch(botsActions.setBotsMessage(t("Создание нового бота...")));
     dispatch(botsActions.setBotsStatus("loading"));
 
-    const bot: IBot = await api.createBot(v.token, user.username);
+    const bot: IBot = await api.createBot(v.token, user.id);
     const isBotExist = bots.bots.find((b) => b.token === v.token);
 
     if (bot && !isBotExist) {

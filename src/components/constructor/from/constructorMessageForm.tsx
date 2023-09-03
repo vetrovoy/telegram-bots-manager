@@ -1,20 +1,20 @@
 import { Button, Form, Typography } from "antd";
 import TextArea from "antd/es/input/TextArea";
 
-import { TConstructor } from "../../../types/app";
+import { IConstructor } from "../../../types/app";
 
 import { useTranslate } from "../../../hooks/useTranslate";
 import { rules } from "../../../utils/rules";
 
-type BotConstructorMessageFormProps = {
-  initialMessage: TConstructor["message"];
+type ConstructorMessageFormProps = {
+  initialMessage: IConstructor["message"];
   onSave: (message: string) => void;
 };
 
-export default function BotConstructorMessageForm({
+export default function ConstructorMessageForm({
   initialMessage,
   onSave,
-}: BotConstructorMessageFormProps) {
+}: ConstructorMessageFormProps) {
   const t = useTranslate();
 
   const onFinish = (v: { message: string }) => {

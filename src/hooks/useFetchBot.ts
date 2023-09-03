@@ -15,7 +15,7 @@ interface IUseFetchBot {
 
 export const useFetchBot = (
   botUsername: string | undefined,
-  username: IUser["username"],
+  userId: IUser["id"],
 ): IUseFetchBot => {
   const dispatch = useTypedDispatch();
   const bots = useTypedSelector((state) => state.bots);
@@ -31,7 +31,7 @@ export const useFetchBot = (
         let currentBots = bots.bots;
 
         if (currentBots.length === 0) {
-          currentBots = await api.getBotsByUserName(username);
+          currentBots = await api.getBotsByUserId(userId);
           dispatch(botsActions.setBots(currentBots));
         }
 
@@ -50,7 +50,7 @@ export const useFetchBot = (
       setStatus("success");
     }
     fetchBot();
-  }, [botUsername, username]);
+  }, [botUsername, userId]);
 
   if (!botUsername) return { status, bot };
 

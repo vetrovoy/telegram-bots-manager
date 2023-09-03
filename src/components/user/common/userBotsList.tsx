@@ -21,13 +21,7 @@ type UserBotsListProps = {
 
 export default function UserBotsList({ user }: UserBotsListProps) {
   const t = useTranslate();
-  const dispatch = useTypedDispatch();
   const bots = useTypedSelector((state) => state.bots);
-
-  useEffect(() => {
-    if (bots.bots.length) return;
-    dispatch(botsAsyncActions.getBots(user));
-  }, []);
 
   return (
     <>

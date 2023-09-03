@@ -9,7 +9,7 @@ import { routeNames } from "../route/routes";
 import AppSpinner from "../components/app/layout/appSpinner";
 import { useTranslate } from "../hooks/useTranslate";
 import { useFetchBot } from "../hooks/useFetchBot";
-import BotConstructor from "../components/bot/constructor/botConstructor";
+import Constructor from "../components/constructor/common/constructor";
 
 type BotProps = {
   user: IUser;
@@ -18,7 +18,7 @@ type BotProps = {
 export default withUserProtectedRoute(function Bot({ user }: BotProps) {
   const location = useLocation();
   const { slug } = useParams();
-  const { bot, status } = useFetchBot(slug, user.username);
+  const { bot, status } = useFetchBot(slug, user.id);
   const t = useTranslate();
 
   if (!slug) {
@@ -45,7 +45,7 @@ export default withUserProtectedRoute(function Bot({ user }: BotProps) {
         >
           {/* <BotsTable loading={bots.status === "loading"} bots={[bot]} /> */}
 
-          <BotConstructor bot={bot} />
+          <Constructor bot={bot} />
         </AppLayout>
       );
     }

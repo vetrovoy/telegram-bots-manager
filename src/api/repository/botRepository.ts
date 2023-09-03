@@ -18,7 +18,7 @@ export class BotRepository {
   }
 
   // Добавить бота
-  public async createBot(token: string, username: string): Promise<IBot> {
+  public async createBot(token: string, user_id: number): Promise<IBot> {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -33,13 +33,12 @@ export class BotRepository {
       const botId: number = this.generateBotId();
       const bot: IBot = {
         token: token,
-        username: username,
         id: botId,
         status: "processing",
-        bot_name: `${username}_${botId}bot`,
-        bot_username: `@${username}_${botId}bot`,
+        bot_name: `${user_id}_${botId}bot`,
+        bot_username: `@${user_id}_${botId}bot`,
         timestamp: new Date().getTime(),
-        constructor: undefined,
+        user_id: user_id,
       };
 
       return bot;
@@ -76,11 +75,11 @@ export class BotRepository {
     }
   }
 
-  // Получить всех ботов пользователя по имени пользователя
-  public async getBotsByUserName(username: string): Promise<IBot[]> {
+  // Получить всех ботов пользователя по ID пользователя
+  public async getBotsByUserId(userId: number): Promise<IBot[]> {
     try {
       const bots = await this.getBots();
-      const userBots = bots.filter((bot) => bot.username === username);
+      const userBots = bots.filter((bot) => bot.user_id === userId);
       return userBots;
     } catch (error: any) {
       throw new Error(`Error while getting bots by username: ${error.message}`);
@@ -152,7 +151,6 @@ export class BotRepository {
       const matchedBots = bots.filter(
         (bot) =>
           bot.token.includes(keyword) ||
-          bot.username.includes(keyword) ||
           bot.bot_name.includes(keyword) ||
           bot.bot_username.includes(keyword),
       );

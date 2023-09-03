@@ -7,10 +7,10 @@ import { IBot, IUser } from "../../types/app";
 import { IInitialBotsState } from "./bots";
 
 const botsAsyncActions = {
-  getBots: createAsyncThunk<IInitialBotsState, IUser>(
-    "bots/getBots",
-    async (userData: IUser) => {
-      const userBots: IBot[] = await api.getBotsByUserName(userData.username);
+  getBotsByUserId: createAsyncThunk<IInitialBotsState, IUser["id"]>(
+    "bots/getBotsByUserId",
+    async (userId: IUser["id"]) => {
+      const userBots: IBot[] = await api.getBotsByUserId(userId);
 
       let result: IInitialBotsState = {
         status: "idle",

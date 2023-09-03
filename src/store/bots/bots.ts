@@ -26,25 +26,28 @@ const botsExtraReducers = (
   builder: ActionReducerMapBuilder<IInitialBotsState>,
 ) => {
   return [
-    builder.addCase(botsAsyncActions.getBots.pending, (state) => {
+    builder.addCase(botsAsyncActions.getBotsByUserId.pending, (state) => {
       state.message = "Загрузка...";
       state.status = "loading";
     }),
     builder.addCase(
-      botsAsyncActions.getBots.fulfilled,
+      botsAsyncActions.getBotsByUserId.fulfilled,
       (state, action: PayloadAction<IInitialBotsState>) => {
         return action.payload;
       },
     ),
-    builder.addCase(botsAsyncActions.getBots.rejected, (state, action) => {
-      state.status = "error";
-      state.message = "Ошибка!";
-    }),
+    builder.addCase(
+      botsAsyncActions.getBotsByUserId.rejected,
+      (state, action) => {
+        state.status = "error";
+        state.message = "Ошибка!";
+      },
+    ),
   ];
 };
 
 const bots = createSlice({
-  name: "user",
+  name: "bots",
   initialState,
   reducers: {
     ...botsReducers,

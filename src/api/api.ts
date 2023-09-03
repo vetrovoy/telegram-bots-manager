@@ -1,15 +1,18 @@
-import { IBot, IUser } from "../types/app";
+import { IBot, IUser, IConstructor } from "../types/app";
 
 import { UserRepository } from "./repository/userRepository";
 import { BotRepository } from "./repository/botRepository";
+import { ConstructorRepository } from "./repository/constructorRepository";
 
 export class ApiService {
   private userRepository: UserRepository;
   private botRepository: BotRepository;
+  private constructorRepository: ConstructorRepository;
 
   constructor() {
     this.userRepository = new UserRepository();
     this.botRepository = new BotRepository();
+    this.constructorRepository = new ConstructorRepository();
   }
 
   // Метод для создания пользователя
@@ -38,8 +41,8 @@ export class ApiService {
   }
 
   // Метод для создания бота
-  public async createBot(token: string, username: string): Promise<IBot> {
-    return await this.botRepository.createBot(token, username);
+  public async createBot(token: string, userId: number): Promise<IBot> {
+    return await this.botRepository.createBot(token, userId);
   }
 
   // Метод для удаления бота по ID
@@ -52,11 +55,29 @@ export class ApiService {
     return await this.botRepository.getBotById(botId);
   }
 
-  // Метод для получения ботов по USERNAME
-  public async getBotsByUserName(username: string): Promise<IBot[]> {
-    return await this.botRepository.getBotsByUserName(username);
+  // Метод для получения ботов по USER ID
+  public async getBotsByUserId(userId: number): Promise<IBot[]> {
+    return await this.botRepository.getBotsByUserId(userId);
   }
-  // getBotsByUserName
+
+  // Метод для получения всех сценариев
+  public async getConstructors(): Promise<IConstructor[]> {
+    return await this.constructorRepository.getConstructors();
+  }
+
+  // Метод для получения сценариев по BOT ID
+  public async getConstructorsByBotId(
+    botId: number,
+  ): Promise<IConstructor | undefined> {
+    return await this.constructorRepository.getConstructorsByBotId(botId);
+  }
+
+  // Метод для получения сценариев по USER ID
+  public async getConstructorsByUserId(
+    userId: number,
+  ): Promise<IConstructor[]> {
+    return await this.constructorRepository.getConstructorsByUserId(userId);
+  }
 }
 
 const api = new ApiService();

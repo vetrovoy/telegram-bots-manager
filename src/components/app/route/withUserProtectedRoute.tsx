@@ -12,6 +12,8 @@ import { IUser } from "../../../types/app";
 import { routeNames } from "../../../route/routes";
 import { useTranslate } from "../../../hooks/useTranslate";
 import AppSpinner from "../layout/appSpinner";
+import constructorAsyncActions from "../../../store/constructor/constructor-async-actions";
+import botsAsyncActions from "../../../store/bots/bots-async-actions";
 
 interface IWithUserProtectedRoute {
   user: IUser | null;
@@ -44,6 +46,10 @@ export default function withUserProtectedRoute<
           dispatch(userActions.setUserMessage(t("Успешная авторизация!")));
           dispatch(userActions.setUserStatus("success"));
           dispatch(userActions.setUser(fetchedUser));
+          dispatch(botsAsyncActions.getBotsByUserId(fetchedUser.id));
+          dispatch(
+            constructorAsyncActions.getConstructorsByUserId(fetchedUser.id),
+          );
         }
       }
     }

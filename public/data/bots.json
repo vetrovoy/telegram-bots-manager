@@ -3,31 +3,16 @@
     "id": 1,
     "status": "processing",
     "token": "6001949251:AAELFYURSWdBek0K94WMjjL4IhGx9OpXLs8",
-    "username": "admin",
+    "user_id": 2,
     "bot_name": "BotFather",
     "bot_username": "BotFather",
-    "timestamp": 1692693874337,
-    "constructor": {
-      "message": "/start",
-      "buttons": [
-        {
-          "id": 123134534523,
-          "name": "help",
-          "response": "help message"
-        },
-        {
-          "id": 1436464623123,
-          "name": "hello",
-          "response": "hello message"
-        }
-      ]
-    }
+    "timestamp": 1692693874337
   },
   {
     "id": 2,
     "status": "default",
     "token": "6001123251:AAELFYURSWdBek0K94WMjjL4IhGx9OpXLs8",
-    "username": "admin",
+    "user_id": 2,
     "bot_name": "admin_2bot",
     "bot_username": "@admin_2bot",
     "timestamp": 1692693344337

@@ -1,13 +1,23 @@
-export type TConstructorButton = {
+export interface IConstructorButtonResponse {
+  id: number;
+  message?: string;
+  buttons_relation?: IConstructorButton["id"][];
+}
+
+export interface IConstructorButton {
   id: number;
   name: string;
-  response?: string;
-};
+  response?: IConstructorButtonResponse;
+}
 
-export type TConstructor = {
+export interface IConstructor {
+  id: number;
+  name: string;
   message: string;
-  buttons: TConstructorButton[];
-};
+  buttons: IConstructorButton[];
+  bot_id: IBot["id"];
+  user_id: IUser["id"];
+}
 
 export interface IBot {
   id: number;
@@ -15,9 +25,8 @@ export interface IBot {
   token: string;
   bot_name: string;
   bot_username: string;
-  username: string;
   timestamp: number;
-  constructor?: TConstructor;
+  user_id: IUser["id"];
 }
 
 export interface IUser {
