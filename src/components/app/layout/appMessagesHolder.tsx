@@ -26,7 +26,7 @@ export default function AppMessagesHolder() {
   // }, [user.status]);
 
   useEffect(() => {
-    if (bots.status !== "idle") {
+    if (bots.status !== "idle" && bots.message.length > 0) {
       botsMessageApi.open({
         type: bots.status,
         content: t(bots.message),

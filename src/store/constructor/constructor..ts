@@ -11,7 +11,7 @@ import constructorReducers from "./constructor-reducers";
 import constructorAsyncActions from "./constructor-async-actions";
 
 export interface IInitialConstructorState {
-  status: "loading" | "success" | "error" | "idle" | "хуй";
+  status: "loading" | "success" | "error" | "idle";
   message: string;
   constructors: IConstructor[];
 }

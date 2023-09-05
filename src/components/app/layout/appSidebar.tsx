@@ -3,6 +3,7 @@ import {
   DesktopOutlined,
   UserOutlined,
   LogoutOutlined,
+  RobotOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Layout, Menu } from "antd";
@@ -39,7 +40,8 @@ export default function AppSidebar() {
       getItem(localStorage.getItem("username"), "USERNAME", <UserOutlined />, [
         getItem(t("Личный кабинет"), routeNames.ACCOUNT),
       ]),
-      getItem(t("Мои боты"), routeNames.DASHBOARD, <DesktopOutlined />),
+      getItem(t("Мои боты"), routeNames.DASHBOARD, <RobotOutlined />),
+      getItem(t("Мои сценарии"), routeNames.CONSTRUCTORS, <DesktopOutlined />),
       getItem(t("Выйти"), "EXIT", <LogoutOutlined />),
     ];
   }, [t]);

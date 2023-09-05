@@ -15,7 +15,7 @@ const constructorAsyncActions = {
       await api.getConstructorsByUserId(userId);
 
     let result: IInitialConstructorState = {
-      status: "idle",
+      status: "success",
       message: "",
       constructors: userConstructors,
     };

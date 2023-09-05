@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 
-import api from "../../../api/api";
-
 import { IBot, IConstructor, IConstructorButton } from "../../../types/app";
 
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
@@ -10,11 +8,11 @@ import ConstructorMessageForm from "../from/constructorMessageForm";
 
 import ConstructorButtons from "./constructorButtons";
 
-type ConstructorProps = {
+type ConstructorFormProps = {
   bot: IBot;
 };
 
-export default function Constructor({ bot }: ConstructorProps) {
+export default function ConstructorForm({ bot }: ConstructorFormProps) {
   const constructors = useTypedSelector(
     (state) => state.constructors.constructors,
   );

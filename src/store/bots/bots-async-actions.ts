@@ -13,12 +13,10 @@ const botsAsyncActions = {
       const userBots: IBot[] = await api.getBotsByUserId(userId);
 
       let result: IInitialBotsState = {
-        status: "idle",
+        status: "success",
         message: "",
         bots: userBots,
       };
-
-      console.log(result);
 
       return result;
     },
