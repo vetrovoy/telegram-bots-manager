@@ -31,8 +31,6 @@ export default function AppMessagesHolder() {
         type: bots.status,
         content: t(bots.message),
       });
-
-      return;
     }
   }, [bots.status]);
 

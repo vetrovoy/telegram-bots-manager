@@ -26,7 +26,7 @@ const userLoginExtraReducers = (
 ) => {
   return [
     builder.addCase(userAsyncActions.login.pending, (state) => {
-      state.message = "Загрузка";
+      state.message = "Загрузка...";
       state.status = "loading";
     }),
     builder.addCase(
@@ -47,7 +47,7 @@ const userLogoutExtraReducers = (
 ) => {
   return [
     builder.addCase(userAsyncActions.logout.pending, (state) => {
-      state.message = "Загрузка";
+      state.message = "Загрузка...";
       state.status = "loading";
     }),
     builder.addCase(
@@ -63,6 +63,27 @@ const userLogoutExtraReducers = (
   ];
 };
 
+const userAuthExtraReducers = (
+  builder: ActionReducerMapBuilder<IInitialUserState>,
+) => {
+  return [
+    builder.addCase(userAsyncActions.auth.pending, (state) => {
+      state.message = "Загрузка...";
+      state.status = "loading";
+    }),
+    builder.addCase(
+      userAsyncActions.auth.fulfilled,
+      (state, action: PayloadAction<IInitialUserState>) => {
+        return action.payload;
+      },
+    ),
+    builder.addCase(userAsyncActions.auth.rejected, (state, action) => {
+      state.status = "error";
+      state.message = "Сбой при авторизации!";
+    }),
+  ];
+};
+
 const user = createSlice({
   name: "user",
   initialState,
@@ -74,6 +95,9 @@ const user = createSlice({
       return reducer;
     });
     userLogoutExtraReducers(builder).map((reducer) => {
+      return reducer;
+    });
+    userAuthExtraReducers(builder).map((reducer) => {
       return reducer;
     });
   },

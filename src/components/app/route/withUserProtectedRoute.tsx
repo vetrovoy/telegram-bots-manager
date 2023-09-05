@@ -1,19 +1,18 @@
 import { ComponentType, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
-import api from "../../../api/api";
 import {
   useTypedDispatch,
   useTypedSelector,
 } from "../../../hooks/useTypedSelector";
 
-import { IInitialUserState, userActions } from "../../../store/user/user";
 import { IUser } from "../../../types/app";
 import { routeNames } from "../../../route/routes";
-import { useTranslate } from "../../../hooks/useTranslate";
+
 import AppSpinner from "../layout/appSpinner";
 import constructorAsyncActions from "../../../store/constructor/constructor-async-actions";
 import botsAsyncActions from "../../../store/bots/bots-async-actions";
+import userAsyncActions from "../../../store/user/user-async-actions";
 
 interface IWithUserProtectedRoute {
   user: IUser | null;
@@ -23,44 +22,38 @@ export default function withUserProtectedRoute<
   T extends IWithUserProtectedRoute,
 >(WrappedComponent: ComponentType<T>) {
   return (props: Omit<T, keyof IWithUserProtectedRoute>) => {
-    const t = useTranslate();
     const dispatch = useTypedDispatch();
-    const user: IInitialUserState = useTypedSelector((state) => state.user);
-    const localUser: string | null = localStorage.getItem("username");
+    const user = useTypedSelector((state) => state.user);
+    const bots = useTypedSelector((state) => state.bots);
+    const constructors = useTypedSelector((state) => state.constructors);
+
+    const localUserId = parseInt(localStorage.getItem("userId") || "") || null;
 
     useEffect(() => {
-      fetchUser();
-    }, []);
-
-    async function fetchUser() {
-      if (user.user) return;
-
-      if (localUser) {
-        dispatch(userActions.setUserStatus("loading"));
-        dispatch(userActions.setUserMessage(t("Загрузка...")));
-
-        const fetchedUser: IUser | undefined =
-          await api.getUserByName(localUser);
-
-        if (fetchedUser) {
-          dispatch(userActions.setUserMessage(t("Успешная авторизация!")));
-          dispatch(userActions.setUserStatus("success"));
-          dispatch(userActions.setUser(fetchedUser));
-          dispatch(botsAsyncActions.getBotsByUserId(fetchedUser.id));
-          dispatch(
-            constructorAsyncActions.getConstructorsByUserId(fetchedUser.id),
-          );
-        }
+      if (localUserId && !user.user) {
+        dispatch(userAsyncActions.auth(localUserId));
       }
-    }
+    }, [localUserId, user.user, dispatch]);
+
+    useEffect(() => {
+      if (localUserId && bots.bots.length === 0) {
+        dispatch(botsAsyncActions.getBotsByUserId(localUserId));
+      }
+    }, [localUserId, bots.bots, dispatch]);
+
+    useEffect(() => {
+      if (localUserId && constructors.constructors.length === 0) {
+        dispatch(constructorAsyncActions.getConstructorsByUserId(localUserId));
+      }
+    }, [localUserId, constructors.constructors, dispatch]);
 
     function renderContent(): JSX.Element {
       const isUserLoading = user.status === "loading";
-      const hasLocalUserAndNoUser = localUser && !user.user;
+      const haslocalUserIdAndNoUser = localUserId && !user.user;
       const hasUser = user.user;
-      const noUserAndNoLocalUser = !user.user && !localUser;
+      const noUserAndNolocalUserId = !user.user && !localUserId;
 
-      if (isUserLoading || hasLocalUserAndNoUser) {
+      if (isUserLoading || haslocalUserIdAndNoUser) {
         return <AppSpinner />;
       }
 
@@ -68,7 +61,7 @@ export default function withUserProtectedRoute<
         return <WrappedComponent {...(props as T)} user={user.user} />;
       }
 
-      if (noUserAndNoLocalUser) {
+      if (noUserAndNolocalUserId) {
         return <Navigate to={routeNames.LOGIN} />;
       }
 

@@ -1,25 +1,14 @@
-import { useEffect } from "react";
-
 import { Typography } from "antd";
 
 import AddUserBotFormModal from "../modal/add/addUserBotFormModal";
 
-import { IUser } from "../../../types/app";
 import BotsList from "../../bot/common/botsList";
-import {
-  useTypedDispatch,
-  useTypedSelector,
-} from "../../../hooks/useTypedSelector";
-import botsAsyncActions from "../../../store/bots/bots-async-actions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useTranslate } from "../../../hooks/useTranslate";
 
 import style from "./style/userBotsList.module.css";
 
-type UserBotsListProps = {
-  user: IUser;
-};
-
-export default function UserBotsList({ user }: UserBotsListProps) {
+export default function UserBotsList() {
   const t = useTranslate();
   const bots = useTypedSelector((state) => state.bots);
 

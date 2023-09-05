@@ -4,7 +4,7 @@ type Translation = {
   [key: string]: string;
 };
 
-export const translate = (str: string, lang: "en" | "ru" = "en"): string => {
+export const translate = (str: string, lang: "en" | "ru" = "ru"): string => {
   if (lang === "ru") return str;
   let value: string = str;
 

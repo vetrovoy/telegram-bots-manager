@@ -18,6 +18,8 @@ const botsAsyncActions = {
         bots: userBots,
       };
 
+      console.log(result);
+
       return result;
     },
   ),

@@ -44,7 +44,7 @@ export default withUserProtectedRoute(function Dashboard({
         }
         className={style.topCard}
       >
-        <UserBotsList user={user} />
+        <UserBotsList />
       </Card>
 
       <Card

@@ -31,6 +31,7 @@ const userAsyncActions = {
           message: "Вы успешно вошли на сайт.",
         };
 
+        localStorage.setItem("userId", user.id.toString());
         localStorage.setItem("username", user.username);
         return result;
       }
@@ -47,6 +48,7 @@ const userAsyncActions = {
   logout: createAsyncThunk<IInitialUserState>("user/logoutUser", async () => {
     return await new Promise((resolve) =>
       setTimeout(() => {
+        localStorage.setItem("userId", "");
         localStorage.setItem("username", "");
 
         const result: IInitialUserState = {
@@ -59,6 +61,28 @@ const userAsyncActions = {
       }, 1000),
     );
   }),
+  auth: createAsyncThunk<IInitialUserState, IUser["id"]>(
+    "user/authUser",
+    async (id: IUser["id"]) => {
+      const fetchedUser: IUser | undefined = await api.getUserById(id);
+
+      let result: IInitialUserState = {
+        status: "error",
+        message: "Сбой при авторизации!",
+        user: null,
+      };
+
+      if (fetchedUser) {
+        result = {
+          status: "idle",
+          message: "Успешная авторизация!",
+          user: fetchedUser,
+        };
+      }
+
+      return result;
+    },
+  ),
 };
 
 export default userAsyncActions;
